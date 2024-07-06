@@ -1,0 +1,338 @@
+{
+    "_reactInternalInstance": {},
+    "_reactInternals": {
+        "_debugHookTypes": null,
+        "_debugNeedsRemount": false,
+        "_debugOwner": {
+            "_debugHookTypes": [Array
+            ],
+            "_debugNeedsRemount": false,
+            "_debugOwner": [FiberNode
+            ],
+            "_debugSource": [Object
+            ],
+            "actualDuration": 49.867573738098145,
+            "actualStartTime": 219294259.267609,
+            "alternate": [FiberNode
+            ],
+            "child": [FiberNode
+            ],
+            "childLanes": 1,
+            "deletions": null,
+            "dependencies": [Object
+            ],
+            "elementType": [Function BaseView
+            ],
+            "flags": 1048577,
+            "index": 0,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [Object
+            ],
+            "memoizedState": [Object
+            ],
+            "mode": 10,
+            "pendingProps": [Object
+            ],
+            "ref": null,
+            "return": [FiberNode
+            ],
+            "selfBaseDuration": 26.466999977827072,
+            "sibling": null,
+            "stateNode": null,
+            "subtreeFlags": 1048581,
+            "tag": 0,
+            "treeBaseDuration": 49.25019583106041,
+            "type": [Function BaseView
+            ],
+            "updateQueue": [Object
+            ]
+        },
+        "_debugSource": {
+            "columnNumber": 17,
+            "fileName": "D:\\Deepak\\React Native\\Asli\\Clone\\customer-app-production\\customerapp-carter\\src\\screens\\SingleOrderMapTracking\\View.js",
+            "lineNumber": 308
+        },
+        "actualDuration": 0.20084699988365173,
+        "actualStartTime": 219294301.758993,
+        "alternate": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [FiberNode
+            ],
+            "_debugSource": [Object
+            ],
+            "actualDuration": 0.016384989023208618,
+            "actualStartTime": 219284600.283424,
+            "alternate": [Circular
+            ],
+            "child": [FiberNode
+            ],
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": [Object
+            ],
+            "elementType": [Function MapMarker
+            ],
+            "flags": 0,
+            "index": 1,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [Object
+            ],
+            "memoizedState": null,
+            "mode": 10,
+            "pendingProps": [Object
+            ],
+            "ref": [Object
+            ],
+            "return": [FiberNode
+            ],
+            "selfBaseDuration": 0.1647309958934784,
+            "sibling": [FiberNode
+            ],
+            "stateNode": [Circular
+            ],
+            "subtreeFlags": 0,
+            "tag": 1,
+            "treeBaseDuration": 0.18196198344230652,
+            "type": [Function MapMarker
+            ],
+            "updateQueue": [Object
+            ]
+        },
+        "child": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [Circular
+            ],
+            "_debugSource": [Object
+            ],
+            "actualDuration": 0.031038999557495117,
+            "actualStartTime": 219294301.925993,
+            "alternate": [FiberNode
+            ],
+            "child": null,
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": "AIRMapMarker",
+            "flags": 4,
+            "index": 0,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [Object
+            ],
+            "memoizedState": null,
+            "mode": 10,
+            "pendingProps": [Object
+            ],
+            "ref": [Object
+            ],
+            "return": [Circular
+            ],
+            "selfBaseDuration": 0.01823100447654724,
+            "sibling": null,
+            "stateNode": [ReactNativeFiberHostComponent
+            ],
+            "subtreeFlags": 0,
+            "tag": 5,
+            "treeBaseDuration": 0.01823100447654724,
+            "type": "AIRMapMarker",
+            "updateQueue": null
+        },
+        "childLanes": 0,
+        "deletions": null,
+        "dependencies": {
+            "firstContext": [Object
+            ],
+            "lanes": 0
+        },
+        "elementType": [Function MapMarker
+        ],
+        "flags": 1,
+        "index": 1,
+        "key": null,
+        "lanes": 0,
+        "memoizedProps": {
+            "anchor": [Object
+            ],
+            "coordinate": [Object
+            ],
+            "flat": true,
+            "icon": [Object
+            ],
+            "style": [Object
+            ],
+            "title": "Bike"
+        },
+        "memoizedState": null,
+        "mode": 10,
+        "pendingProps": {
+            "anchor": [Object
+            ],
+            "coordinate": [Object
+            ],
+            "flat": true,
+            "icon": [Object
+            ],
+            "style": [Object
+            ],
+            "title": "Bike"
+        },
+        "ref": {
+            "current": [Circular
+            ]
+        },
+        "return": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [FiberNode
+            ],
+            "_debugSource": [Object
+            ],
+            "actualDuration": 1.4670008420944214,
+            "actualStartTime": 219294301.706455,
+            "alternate": [FiberNode
+            ],
+            "child": [Circular
+            ],
+            "childLanes": 1,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": "AIRMap",
+            "flags": 4,
+            "index": 0,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [Object
+            ],
+            "memoizedState": null,
+            "mode": 10,
+            "pendingProps": [Object
+            ],
+            "ref": [Object
+            ],
+            "return": [FiberNode
+            ],
+            "selfBaseDuration": 0.049115002155303955,
+            "sibling": null,
+            "stateNode": [ReactNativeFiberHostComponent
+            ],
+            "subtreeFlags": 5,
+            "tag": 5,
+            "treeBaseDuration": 1.3721548914909363,
+            "type": "AIRMap",
+            "updateQueue": null
+        },
+        "selfBaseDuration": 0.16303899884223938,
+        "sibling": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [FiberNode
+            ],
+            "_debugSource": [Object
+            ],
+            "actualDuration": 0.4868079721927643,
+            "actualStartTime": 219294301.973532,
+            "alternate": [FiberNode
+            ],
+            "child": [FiberNode
+            ],
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": [Object
+            ],
+            "flags": 1,
+            "index": 2,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [Object
+            ],
+            "memoizedState": null,
+            "mode": 10,
+            "pendingProps": [Object
+            ],
+            "ref": null,
+            "return": [FiberNode
+            ],
+            "selfBaseDuration": 0.06353798508644104,
+            "sibling": [FiberNode
+            ],
+            "stateNode": null,
+            "subtreeFlags": 5,
+            "tag": 11,
+            "treeBaseDuration": 0.462306946516037,
+            "type": [Object
+            ],
+            "updateQueue": null
+        },
+        "stateNode": [Circular
+        ],
+        "subtreeFlags": 4,
+        "tag": 1,
+        "treeBaseDuration": 0.18127000331878662,
+        "type": [Function MapMarker
+        ],
+        "updateQueue": {
+            "baseState": null,
+            "effects": null,
+            "firstBaseUpdate": null,
+            "lastBaseUpdate": null,
+            "shared": [Object
+            ]
+        }
+    },
+    "animateMarkerToCoordinate": [Function bound animateMarkerToCoordinate
+    ],
+    "context": undefined,
+    "hideCallout": [Function bound hideCallout
+    ],
+    "marker": {
+        "current": {
+            "_children": [Array
+            ],
+            "_internalFiberInstanceHandleDEV": [FiberNode
+            ],
+            "_nativeTag": 4073,
+            "viewConfig": [Object
+            ]
+        }
+    },
+    "props": {
+        "anchor": {
+            "x": 0.5,
+            "y": 0.5
+        },
+        "coordinate": {
+            "latitude": -6.91200418,
+            "longitude": 107.57937301
+        },
+        "flat": true,
+        "icon": {
+            "uri": "http://172.16.0.2:1167//Map/map-wali.png"
+        },
+        "style": {
+            "transform": [Array
+            ]
+        },
+        "title": "Bike"
+    },
+    "redrawCallout": [Function bound redrawCallout
+    ],
+    "refs": {},
+    "showCallout": [Function bound showCallout
+    ],
+    "state": null,
+    "updater": {
+        "enqueueForceUpdate": [Function enqueueForceUpdate
+        ],
+        "enqueueReplaceState": [Function enqueueReplaceState
+        ],
+        "enqueueSetState": [Function enqueueSetState
+        ],
+        "isMounted": [Function isMounted
+        ]
+    }
+}
