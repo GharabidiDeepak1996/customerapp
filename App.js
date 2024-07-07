@@ -75,9 +75,14 @@ function App() {
   return (
     <StrictMode>
       <SafeAreaProvider>
-        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
-          <RootStack />
-        </NavigationContainer>
+        <Provider store={mystore}>
+          <PersistGate loading={null} persistor={persistor}>
+            <NavigationContainer
+              theme={scheme === 'dark' ? DarkTheme : LightTheme}>
+              <RootStack />
+            </NavigationContainer>
+          </PersistGate>
+        </Provider>
       </SafeAreaProvider>
     </StrictMode>
   );
@@ -178,7 +183,6 @@ export function RootStack() {
     <View style={{flex: 1}}>
       <Stack.Navigator
         initialRouteName={Config.SELECTED_VARIANT}
-        // initialRouteName={Routes.INTRO_SCREEN1}
         headerMode={'none'}
         screenOptions={{
           ...(Platform.OS === 'android' &&

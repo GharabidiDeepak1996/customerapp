@@ -24,6 +24,11 @@ import {useTranslation} from 'react-i18next';
 import axios from 'axios';
 import {ScrollView} from 'react-native-gesture-handler';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {
+  requestLocationPermission,
+  requestNotificationPermission,
+  requestStoragePermission,
+} from '../../../utils/Permission';
 
 const Variant1Intro = () => {
   const {t, i18n} = useTranslation();
@@ -109,159 +114,8 @@ const Variant1Intro = () => {
 
   const fetchPermission = async () => {
     await requestLocationPermission();
-    // await requestNotificationPermission();
-    //await requestStoragePermission();
-    // await requestPermission(
-    //   PermissionsAndroid.PERMISSIONS.CAMERA,
-    //   'Camera Permission',
-    //   'To continue, turn on device camera to capture photos.',
-    // );
-  };
-
-  const requestPermission = async (permission, title, message) => {
-    try {
-      const granted = await PermissionsAndroid.request(permission, {
-        title: title,
-        message: message,
-        buttonPositive: 'OK',
-      });
-
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log(`${title} permission granted. You can now use it.`);
-        return true;
-      } else if (granted === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-        console.log(
-          `${title} permission denied, and user selected "Never Ask Again".`,
-        );
-        Alert.alert(
-          `${title} Permission Required`,
-          `To use this app, please enable ${title.toLowerCase()} in your device settings.`,
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                if (Platform.OS === 'android') {
-                  Linking.openSettings();
-                }
-              },
-            },
-          ],
-        );
-        return false;
-      } else {
-        console.log(`${title} permission denied.`);
-        Alert.alert(
-          `${title} Permission Required`,
-          `To use this app, please grant ${title.toLowerCase()} access.`,
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                if (Platform.OS === 'android') {
-                  Linking.openSettings();
-                }
-              },
-            },
-          ],
-        );
-        return false;
-      }
-    } catch (error) {
-      console.log(`${title} permission error:`, error);
-      return false;
-    }
-  };
-
-  const requestStoragePermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        {
-          title: 'Storage Permission',
-          message: 'To continue, turn on device storage to save photos.',
-          buttonPositive: 'OK',
-        },
-      );
-
-      // Handle the result of the permission request accordingly
-      // ...
-    } catch (error) {
-      console.log('Error requesting storage Permission:', error);
-    }
-  };
-
-  const checkApplicationPermission = async () => {
-    if (Platform.OS === 'android') {
-      try {
-        await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.NOTIFICATIONS,
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-  const requestNotificationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-        {
-          title: 'Notification Permission',
-          message:
-            'To continue, turn on device notification which uses Google’s notification services.',
-          buttonPositive: 'OK',
-        },
-      );
-
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('notification permission granted.');
-        //getLocation();
-        return true;
-      }
-      // else if (granted === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-      //   console.log(
-      //     'notification permission denied, and user selected "Never Ask Again".',
-      //   );
-      //   // Show an alert explaining the necessity of location permission and guide the user to settings
-      //   Alert.alert(
-      //     'Notification Permission Required',
-      //     'To use this app, please enable notification services in your device settings.',
-      //     [
-      //       {
-      //         text: 'OK',
-      //         onPress: () => {
-      //           // Redirect the user to app settings
-      //           if (Platform.OS === 'android') {
-      //             Linking.openSettings();
-      //           }
-      //         },
-      //       },
-      //     ],
-      //   );
-      //   return false;
-      // } else {
-      //   console.log('notification permission denied.');
-      //   // Show an alert informing the user about the necessity of location permission
-      //   Alert.alert(
-      //     'NOtification Permission Required',
-      //     'To use this app, please grant notification access.',
-      //     [
-      //       {
-      //         text: 'OK',
-      //         onPress: () => {
-      //           // Close the app
-      //           if (Platform.OS === 'android') {
-      //             Linking.openSettings();
-      //           }
-      //         },
-      //       },
-      //     ],
-      //   );
-      //   return false;
-      // }
-    } catch (error) {
-      console.log('Error requesting notification permission:', error);
-    }
+    await requestNotificationPermission();
+    await requestStoragePermission();
   };
 
   const getWelcomeBanners = async () => {
@@ -284,73 +138,6 @@ const Variant1Intro = () => {
       });
   };
 
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Geolocation Permission',
-          message:
-            'To continue, turn on device location which uses Google’s location services.',
-          // buttonNeutral: 'Ask Me Later',
-          // buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log(
-          'Location permission granted. You can now use Geolocation.',
-        );
-        //getLocation();
-        return true;
-      } else if (granted === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-        console.log(
-          'Location permission denied, and user selected "Never Ask Again".',
-        );
-        // Show an alert explaining the necessity of location permission and guide the user to settings
-        Alert.alert(
-          'Location Permission Required',
-          'To use this app, please enable location services in your device settings.',
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                // Redirect the user to app settings
-                if (Platform.OS === 'android') {
-                  Linking.openSettings();
-                }
-              },
-            },
-          ],
-        );
-        return false;
-      } else {
-        console.log('Location permission denied.');
-        // Show an alert informing the user about the necessity of location permission
-        Alert.alert(
-          'Location Permission Required',
-          'To use this app, please grant location access.',
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                // Close the app
-                if (Platform.OS === 'android') {
-                  Linking.openSettings();
-                }
-              },
-            },
-          ],
-        );
-        return false;
-      }
-    } catch (err) {
-      console.error('Error requesting location permission:', err);
-      return false;
-    }
-  };
-
   return (
     <ScrollView
       style={screenStyles.container}
@@ -362,6 +149,7 @@ const Variant1Intro = () => {
             barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
           />
 
+          {/* Banner */}
           <View style={screenStyles.introUpperContainer}>
             <Carousel
               ref={c => {
@@ -390,6 +178,7 @@ const Variant1Intro = () => {
           </View>
 
           <View style={screenStyles.introLowerContainer}>
+            {/* Button1 */}
             <AppButton
               title={activeSlideIndex === 0 ? t('Get started') : t('Skip')}
               onPress={() => {
@@ -401,6 +190,7 @@ const Variant1Intro = () => {
               buttonStyle={screenStyles.buttonStyle}
             />
 
+            {/* Button2 */}
             <AppButton
               title={t('Language')}
               onPress={() => {
