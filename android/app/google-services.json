@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "119095786908",
+    "project_id": "eal-app",
+    "storage_bucket": "eal-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119095786908:android:2e3778a4d31e3956045c59",
+        "android_client_info": {
+          "package_name": "com.asli.therealsuperapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCspEUgVRKHFar2RpMCuoD4qIyRYbx3ndI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

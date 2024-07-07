@@ -30,7 +30,7 @@ import {
   requestStoragePermission,
 } from '../../../utils/Permission';
 
-const Variant1Intro = () => {
+const Variant1Intro = props => {
   const {t, i18n} = useTranslation();
   const scheme = useColorScheme();
   const {colors} = useTheme();

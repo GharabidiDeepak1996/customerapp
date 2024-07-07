@@ -40,6 +40,7 @@ import Config from './branding/carter/configuration/Config';
 import Routes from './src/navigation/Routes';
 import {SplashScreen} from './src/screens/splash/View';
 import Variant1Intro from './src/screens/Variant1/Intro/View';
+import Variant1LoginFormScreen from './src/screens/Variant1/LoginForm/View';
 
 const lightColors = AppConfig.lightColors.default;
 const darkColors = AppConfig.darkColors.default;
@@ -190,6 +191,10 @@ export function RootStack() {
         }}>
         {/* <Stack.Screen name={Routes.SPLASH_SCREEN} component={SplashScreen} /> */}
         <Stack.Screen name={Routes.INTRO_SCREEN1} component={Variant1Intro} />
+        <Stack.Screen
+          name={Routes.LOGIN_FORM_SCREEN1}
+          component={Variant1LoginFormScreen}
+        />
       </Stack.Navigator>
     </View>
   );

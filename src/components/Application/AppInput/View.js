@@ -1,18 +1,17 @@
 import React from 'react';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { TextInput } from '../../Global/TextInput/View';
-import { useColorScheme } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
-import { SvgIcon } from '../SvgIcon/View';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {TextInput, useColorScheme} from 'react-native';
+import {useTheme} from '@react-navigation/native';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
+import {SvgIcon} from '../SvgIcon/View';
 
 const PropTypes = require('prop-types');
 
 const AppInput = props => {
   //Theme based styling and colors
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
 
@@ -26,7 +25,7 @@ const AppInput = props => {
   const placeholderTextColor =
     props.placeholderTextColor ||
     globalStyles.primaryInputStyle.placeholderTextColor;
-  const onChangeText = props.onChangeText || (() => { });
+  const onChangeText = props.onChangeText || (() => {});
   const leftIcon = props.leftIcon || '';
   const leftIconColor =
     props.iconColor || globalStyles.primaryInputStyle.iconColor;
@@ -45,7 +44,7 @@ const AppInput = props => {
   const leftIconContainerStyle =
     props.leftIconContainerStyle ||
     globalStyles.primaryInputStyle.leftIconContainerStyle;
-  const multilineInputHeight = props.multilineInputHeight || { height: hp(30) };
+  const multilineInputHeight = props.multilineInputHeight || {height: hp(30)};
   const showLeftIcon =
     props.showLeftIcon !== undefined ? props.showLeftIcon : true;
   const disabled = props.disabled || false;
