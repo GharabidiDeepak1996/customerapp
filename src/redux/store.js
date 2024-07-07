@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 //persist
-import { combineReducers } from '@reduxjs/toolkit';
+import {combineReducers} from '@reduxjs/toolkit';
 import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
 
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   addressReducer: addressReducer,
   product: ProductSlice, // Use the persistedReducer for the 'product' slice
   dashboard: dashboardSlice,
-  notification: notificationSlice
+  notification: notificationSlice,
 });
 
 const persistConfig = {
@@ -40,7 +40,7 @@ const mystore = configureStore({
 });
 
 const persistor = persistStore(mystore);
-export { mystore, persistor };
+export {mystore, persistor};
 
 // export default store = configureStore({
 //   reducer: {

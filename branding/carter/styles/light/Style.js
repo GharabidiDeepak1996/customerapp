@@ -57,9 +57,8 @@ export const commonLightStyles = function (colors) {
       iconColor: colors.inputColor,
       backgroundColor: colors.inputSecondaryBackground,
       defaultContainerStyle: {
-
         // height: buttonHeight,
-        borderRadius: hp(0.75)
+        borderRadius: hp(0.75),
       },
       leftIconContainerStyle: {
         paddingRight: wp('3'),
@@ -81,9 +80,8 @@ export const commonLightStyles = function (colors) {
         borderRadius: hp(0.75),
         borderWidth: 1,
         borderColor: '#d4d4d4',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
         // backgroundColor: 'red'
-
       },
       leftIconContainerStyle: {
         paddingRight: wp('3'),
@@ -93,7 +91,6 @@ export const commonLightStyles = function (colors) {
       multilineInputHeight: {
         height: hp('30'),
       },
-
     },
     checkoutInputStyle: {
       placeholderTextColor: colors.inputColor,
@@ -167,7 +164,7 @@ export const commonLightStyles = function (colors) {
       containerStyle: {
         flex: 1,
         //backgroundColor: colors.secondaryBackground,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
       },
 
       childContainerStyle: {

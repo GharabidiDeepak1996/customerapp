@@ -168,7 +168,7 @@ function bottomTabsVariant3() {
   );
 }
 
-export function RootStack() {
+export const RootStack = () => {
   return (
     <View style={{flex: 1}}>
       <Stack.Navigator
@@ -397,4 +397,4 @@ export function RootStack() {
       </Stack.Navigator>
     </View>
   );
-}
+};

@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {RootStack} from './src/navigation/RootStack';
 import {
   SafeAreaConsumer,
   SafeAreaProvider,
@@ -18,6 +17,7 @@ import Globals from './src/utils/Globals';
 import AppConfig from './branding/App_config';
 import {Provider} from 'react-redux';
 import {persistor, mystore} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 import {ProductService} from './src/apis/services/product';
 import PushController from './src/utils/PushController';
 import {
@@ -31,13 +31,21 @@ import {toastConfig} from './src/utils/ToastMessage';
 import {
   Colors,
   DebugInstructions,
-  Header,
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Config from './branding/carter/configuration/Config';
+import Routes from './src/navigation/Routes';
+import {SplashScreen} from './src/screens/splash/View';
+import Variant1Intro from './src/screens/Variant1/Intro/View';
 
 const lightColors = AppConfig.lightColors.default;
 const darkColors = AppConfig.darkColors.default;
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const DarkTheme = {
   dark: true,
@@ -66,19 +74,85 @@ function App() {
 
   return (
     <StrictMode>
-      <Provider store={mystore}>
-        <PersistGate loading={null} persistor={persistor}>
-          <SafeAreaProvider>
-            <NavigationContainer
-              theme={scheme === 'dark' ? DarkTheme : LightTheme}>
-              <RootStack />
-            </NavigationContainer>
-          </SafeAreaProvider>
-        </PersistGate>
-      </Provider>
+      <SafeAreaProvider>
+        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
+          <RootStack />
+        </NavigationContainer>
+      </SafeAreaProvider>
     </StrictMode>
   );
 }
+
+const bottomTabsVariant = () => {
+  return (
+    <Tab.Navigator tabBar={props => <Variant3BottomTabBar {...props} />}>
+      <Tab.Screen
+        name={Routes.DASHBOARD_VARIENT_1}
+        component={Variant1Dashboard}
+      />
+      <Tab.Screen
+        name={Routes.GROCERY}
+        component={Variant1Home}
+        initialParams={{categoryTypeId: '1'}}
+      />
+      <Tab.Screen
+        name={Routes.FOOD}
+        component={Variant1Home}
+        initialParams={{categoryTypeId: '2'}}
+      />
+      {/* <Tab.Screen
+        name={Routes.COURIER_DELIVERY_DETAILS}
+        component={DeliveryDetails}
+        initialParams={{pickupAddress: ''}}
+      /> */}
+
+      <Tab.Screen
+        name={Routes.FRESH_GOODS}
+        component={Variant1Home}
+        initialParams={{categoryTypeId: '5'}}
+      />
+
+      <Tab.Screen
+        name={Routes.COURIER}
+        component={Courier}
+        options={{unmountOnBlur: true}}
+        initialParams={{
+          pickupAddress: undefined,
+        }}
+      />
+      {/* <Tab.Screen name={Routes.COURIER} component={Courier} initialParams={{
+        pickupTitle: "",
+        pickupAddress: "",
+        pickupLat: "",
+        pickupLng: "",
+        idp: "",
+        subDistrictTitle: "",
+        subDistrictIdPickUp: "",
+      }} /> */}
+
+      <Tab.Screen name={Routes.RIDE} component={Ride} />
+      <Tab.Screen name={Routes.PROFILE} component={Variant1Profile} />
+    </Tab.Navigator>
+  );
+};
+
+const Header = () => {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.goBack()}
+      style={{marginHorizontal: 10}}>
+      <SvgIcon
+        style={{}}
+        color={'#000'}
+        width={25}
+        height={25}
+        type={IconNames.ArrowLeft}
+      />
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -99,4 +173,21 @@ const styles = StyleSheet.create({
   },
 });
 
+export function RootStack() {
+  return (
+    <View style={{flex: 1}}>
+      <Stack.Navigator
+        initialRouteName={Config.SELECTED_VARIANT}
+        // initialRouteName={Routes.INTRO_SCREEN1}
+        headerMode={'none'}
+        screenOptions={{
+          ...(Platform.OS === 'android' &&
+            TransitionPresets.RevealFromBottomAndroid),
+        }}>
+        {/* <Stack.Screen name={Routes.SPLASH_SCREEN} component={SplashScreen} /> */}
+        <Stack.Screen name={Routes.INTRO_SCREEN1} component={Variant1Intro} />
+      </Stack.Navigator>
+    </View>
+  );
+}
 export default App;

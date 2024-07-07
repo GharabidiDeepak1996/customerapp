@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Image,
   useColorScheme,
@@ -7,30 +7,28 @@ import {
   PermissionsAndroid,
   Platform,
   Alert,
+  Text,
 } from 'react-native';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { Text } from 'react-native-elements';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import Routes from '../../../navigation/Routes';
-import { CommonActions, StackActions, useTheme } from '@react-navigation/native';
-import { Styles } from './Style';
+import {CommonActions, StackActions, useTheme} from '@react-navigation/native';
+import {Styles} from './Style';
 import Globals from '../../../utils/Globals';
 import AppButton from '../../../components/Application/AppButton/View';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
-import { FocusAwareStatusBar } from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
+import {FocusAwareStatusBar} from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18n from '../../../utils/i18n';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import axios from 'axios';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 
-export const Variant1Intro = props => {
-  const { t, i18n } = useTranslation();
-
-  //Theme based styling and colors
+const Variant1Intro = () => {
+  const {t, i18n} = useTranslation();
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, colors);
@@ -38,13 +36,12 @@ export const Variant1Intro = props => {
   //Internal States
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [showIntroApp, setShowIntroApp] = useState(false);
-  const [welcomeBanners, setWelcomeBanners] = useState(false);
+  const [welcomeBanners, setWelcomeBanners] = useState([]);
 
   //References
   let _carouselRef = useRef();
-  let _isIntroRef = useRef(false);
 
-  const _renderItem = ({ item, index }) => {
+  const _renderItem = ({item, index}) => {
     return (
       <View style={screenStyles.introItemContainer}>
         {/* <Image source={item.headerImg} style={screenStyles.introItemImage} />
@@ -62,7 +59,6 @@ export const Variant1Intro = props => {
       </View>
     );
   };
-
   const introSliderBoolean = async value => {
     try {
       await AsyncStorage.setItem('isIntroRead', JSON.stringify(value));
@@ -175,6 +171,7 @@ export const Variant1Intro = props => {
       return false;
     }
   };
+
   const requestStoragePermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -204,7 +201,6 @@ export const Variant1Intro = props => {
       }
     }
   };
-
   const requestNotificationPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -381,7 +377,7 @@ export const Variant1Intro = props => {
             />
 
             <Pagination
-              dotsLength={6}
+              dotsLength={welcomeBanners.length}
               activeDotIndex={activeSlideIndex}
               dotColor={colors.paginationDotActiveColor}
               inactiveDotColor={colors.paginationDotInActiveColor}
@@ -417,3 +413,5 @@ export const Variant1Intro = props => {
     </ScrollView>
   );
 };
+
+export default Variant1Intro;

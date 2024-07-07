@@ -2513,7 +2513,7 @@
     metro-config "^0.80.3"
     metro-runtime "^0.80.3"
 
-"@react-native/normalize-colors@^0.73.0", "@react-native/normalize-colors@0.73.2":
+"@react-native/normalize-colors@^0.73.0":
   version "0.73.2"
   resolved "https://registry.npmjs.org/@react-native/normalize-colors/-/normalize-colors-0.73.2.tgz"
   integrity sha512-bRBcb2T+I88aG74LMVHaKms2p/T8aQd8+BZ7LuuzXlRfog1bMWWn/C5i0HVuvW4RPtXQYgIlGiXVDy9Ir1So/w==
@@ -2522,6 +2522,11 @@
   version "0.72.0"
   resolved "https://registry.npmjs.org/@react-native/normalize-colors/-/normalize-colors-0.72.0.tgz"
   integrity sha512-285lfdqSXaqKuBbbtP9qL2tDrfxdOFtIMvkKadtleRQkdOxx+uzGvFr82KHmc/sSiMtfXGp7JnFYWVh4sFl7Yw==
+
+"@react-native/normalize-colors@0.73.2":
+  version "0.73.2"
+  resolved "https://registry.npmjs.org/@react-native/normalize-colors/-/normalize-colors-0.73.2.tgz"
+  integrity sha512-bRBcb2T+I88aG74LMVHaKms2p/T8aQd8+BZ7LuuzXlRfog1bMWWn/C5i0HVuvW4RPtXQYgIlGiXVDy9Ir1So/w==
 
 "@react-native/normalize-colors@0.74.85":
   version "0.74.85"
@@ -3138,6 +3143,13 @@
   version "1.2.7"
   resolved "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.7.tgz"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
+
+"@types/react-addons-shallow-compare@^0.14.22":
+  version "0.14.25"
+  resolved "https://registry.npmjs.org/@types/react-addons-shallow-compare/-/react-addons-shallow-compare-0.14.25.tgz"
+  integrity sha512-pPeim+3t4/RgbWxpG6ftxXjf41JFoXe545aYSPXzfyqBUxGsVmYSdteNDtmiKtZfYbQKuYBXlzTey08nKgwtoA==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-native-vector-icons@^6.4.6":
   version "6.4.18"
@@ -10404,7 +10416,7 @@ prompts@^2.0.1, prompts@^2.4.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@*, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.7.x, prop-types@^15.8.1, prop-types@>=15.5.0, prop-types@>=15.6.0:
+prop-types@*, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.7.x, prop-types@^15.8.1, prop-types@>=15.5.0, prop-types@>=15.6.0:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -11022,12 +11034,12 @@ react-native-size-matters@^0.3.1:
   resolved "https://registry.npmjs.org/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"
   integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
 
-react-native-snap-carousel@^3.9.1:
-  version "3.9.1"
-  resolved "https://registry.npmjs.org/react-native-snap-carousel/-/react-native-snap-carousel-3.9.1.tgz"
-  integrity sha512-xWEGusacIgK1YaDXLi7Gao2+ISLoGPVEBR8fcMf4tOOJQufutlNwkoLu0l6B8Qgsrre0nTxoVZikRgGRDWlLaQ==
+react-native-snap-carousel@^4.0.0-beta.6:
+  version "4.0.0-beta.6"
+  resolved "https://registry.npmjs.org/react-native-snap-carousel/-/react-native-snap-carousel-4.0.0-beta.6.tgz"
+  integrity sha512-jr6Kesrn+/047FwL32JRwAL6/l4Soz2uw73rFM5LfoGTgZhPatUsw60eTE3bznqFewPhoFIKezYe2m3LypTnIA==
   dependencies:
-    prop-types "^15.6.1"
+    "@types/react-addons-shallow-compare" "^0.14.22"
     react-addons-shallow-compare "15.6.2"
 
 react-native-star-rating-widget@^1.8.0:
@@ -11185,7 +11197,7 @@ react-native-windows@*, "react-native-windows@^0.61.0 || ^0.62.0 || ^0.63.0 || ^
     ws "^6.2.2"
     yargs "^17.6.2"
 
-react-native@*, "react-native@^0.0.0-0 || >=0.60 <1.0", "react-native@^0.61.5 || ^0.62.3 || ^0.63.2 || ^0.64.2 || ^0.65.0 || ^0.66.0 || ^0.67.0 || ^0.68.0 || ^0.69.0 || ^0.70.0 || ^0.71.0 || ^0.72.0 || ^0.73.0", react-native@^0.73.0, "react-native@>= 0.56.0", "react-native@>= 0.59", "react-native@>= 0.64.3", "react-native@>= 0.67", react-native@>=0.23.1, react-native@>=0.25.1, react-native@>=0.29, react-native@>=0.33, react-native@>=0.35, react-native@>=0.42.0, react-native@>=0.57, react-native@>=0.58.4, react-native@>=0.59, react-native@>=0.59.0, react-native@>=0.61.0, react-native@>=0.65.0, react-native@0.74.3:
+react-native@*, "react-native@^0.0.0-0 || >=0.60 <1.0", "react-native@^0.61.5 || ^0.62.3 || ^0.63.2 || ^0.64.2 || ^0.65.0 || ^0.66.0 || ^0.67.0 || ^0.68.0 || ^0.69.0 || ^0.70.0 || ^0.71.0 || ^0.72.0 || ^0.73.0", react-native@^0.73.0, "react-native@>= 0.56.0", "react-native@>= 0.59", "react-native@>= 0.64.3", "react-native@>= 0.67", react-native@>=0.23.1, react-native@>=0.25.1, react-native@>=0.29, react-native@>=0.33, react-native@>=0.35, react-native@>=0.42.0, react-native@>=0.57, react-native@>=0.58.0, react-native@>=0.58.4, react-native@>=0.59, react-native@>=0.59.0, react-native@>=0.61.0, react-native@>=0.65.0, react-native@0.74.3:
   version "0.74.3"
   dependencies:
     "@jest/create-cache-key-function" "^29.6.3"
@@ -11315,7 +11327,7 @@ react-timer-mixin@^0.13.4:
   resolved "https://registry.npmjs.org/react-timer-mixin/-/react-timer-mixin-0.13.4.tgz"
   integrity sha512-4+ow23tp/Tv7hBM5Az5/Be/eKKF7DIvJ09voz5LyHGQaqqz9WV8YMs31eFvcYQs7d451LSg7kDJV70XYN/Ug/Q==
 
-react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^16.13.1, react@^16.14.0, react@^16.3.0, "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", react@^18.0, react@^18.2.0, "react@>= 16", "react@>= 16.8.0", "react@>= 17.0.1", react@>=0.14.5, react@>=0.14.8, react@>=15.0.0, react@>=16.0, react@>=16.3.0, react@>=16.5.1, react@>=16.6.3, react@>=16.8, react@>=16.8.0, react@>=17.0.0, "react@16.9.0 || 16.11.0 || 16.13.1 || 17.0.1 || 17.0.2 || 18.0.0 || 18.1.0 || 18.2.0", react@16.x.x, react@18.2.0:
+react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", react@^16.13.1, react@^16.14.0, react@^16.3.0, "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", react@^18.0, react@^18.2.0, "react@>= 16", "react@>= 16.8.0", "react@>= 17.0.1", react@>=0.14.5, react@>=0.14.8, react@>=16.0, react@>=16.0.0, react@>=16.3.0, react@>=16.5.1, react@>=16.6.3, react@>=16.8, react@>=16.8.0, react@>=17.0.0, "react@16.9.0 || 16.11.0 || 16.13.1 || 17.0.1 || 17.0.2 || 18.0.0 || 18.1.0 || 18.2.0", react@16.x.x, react@18.2.0:
   version "18.2.0"
   dependencies:
     loose-envify "^1.1.0"

@@ -1,8 +1,8 @@
 import Routes from '../navigation/Routes';
-import { Animated, Platform } from 'react-native';
+import {Animated, Platform} from 'react-native';
 import AppConfig from '../../branding/App_config';
 import assets from '../../branding/carter/assets/Assets';
-import { CommonActions } from '@react-navigation/native';
+import {CommonActions} from '@react-navigation/native';
 //import Config from '../../branding/carter/configuration/Config';
 import IconNames from '../../branding/carter/assets/IconNames';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -34,18 +34,18 @@ class Globals {
   // });
 
   // local
-  static baseUrl = 'http://172.16.0.2:1175/customer';
-  static imgBaseURL = 'http://172.16.0.2:1167/';
-  static baseUrlForPayment = 'http://172.16.0.2:1175/Payment';
-  static googleApiKey = 'AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM'; //AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM
-  static build = 'Local Build';
+  // static baseUrl = 'http://172.16.0.2:1175/customer';
+  // static imgBaseURL = 'http://172.16.0.2:1167/';
+  // static baseUrlForPayment = 'http://172.16.0.2:1175/Payment';
+  // static googleApiKey = 'AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM'; //AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM
+  // static build = 'Local Build';
 
   //local67
-  // static baseUrl = 'http://103.209.36.67:1175/customer';
-  // static imgBaseURL = 'http://103.209.36.67:1167/'; //local api
-  // static baseUrlForPayment = 'http://103.209.36.67:1175/Payment';
-  // static googleApiKey = 'AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM';  //AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM
-  // static build = 'public Build';
+  static baseUrl = 'http://103.209.36.67:1175/customer';
+  static imgBaseURL = 'http://103.209.36.67:1167/'; //local api
+  static baseUrlForPayment = 'http://103.209.36.67:1175/Payment';
+  static googleApiKey = 'AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM'; //AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM
+  static build = 'public Build';
   //
 
   // staging
@@ -62,7 +62,6 @@ class Globals {
   // static googleApiKey = 'AIzaSyDlC_5Z9PeozxF4Vf6LnRfJU9q9mOfG2wM';
   // static build = '';
   //
-
 
   //Profile List
   static profileList = navigation => {
@@ -84,7 +83,7 @@ class Globals {
         id: 3,
         icon: IconNames.MapMarkerAlt,
         title: 'My Address Book',
-        onPress: () => navigation.navigate(Routes.My_Address, { isNew: true }),
+        onPress: () => navigation.navigate(Routes.My_Address, {isNew: true}),
       },
       {
         id: 4,
@@ -150,7 +149,7 @@ class Globals {
           navigation.dispatch(
             CommonActions.reset({
               index: 1,
-              routes: [{ name: Routes.LOGIN_FORM_SCREEN1 }],
+              routes: [{name: Routes.LOGIN_FORM_SCREEN1}],
             }),
           );
         },
