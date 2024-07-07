@@ -67,14 +67,13 @@ export const Styles = function (styles, colors) {
       flex: 0.1,
       width: styles.gridWidth3,
       alignSelf: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     buttonStyle: {
       height: buttonHeight,
-
       backgroundColor: colors.buttonBackground,
-
       borderRadius: hp(0.75),
-
       shadowColor: colors.buttonBackground,
       shadowOffset: {
         width: 0,
@@ -82,9 +81,9 @@ export const Styles = function (styles, colors) {
       },
       shadowOpacity: 0.4,
       shadowRadius: 2.22,
-
       elevation: 3,
       marginBottom: hp(0.75),
+      width: '100%',
     },
   };
 };

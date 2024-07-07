@@ -388,6 +388,7 @@ const Variant1Intro = () => {
               inactiveDotStyle={screenStyles.paginationInactiveDotStyle}
             />
           </View>
+
           <View style={screenStyles.introLowerContainer}>
             <AppButton
               title={activeSlideIndex === 0 ? t('Get started') : t('Skip')}
