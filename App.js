@@ -54,6 +54,7 @@ import {Ride} from './src/screens/Variant1/Courier copy/View';
 import {Variant1Profile} from './src/screens/Variant1/Profile/View';
 import Variant3BottomTabBar from './src/components/Application/Variant3BottomTabBar/View';
 import MyAddress from './src/screens/MyAddress/View';
+import DeliveryDetails from './src/screens/Variant1/Courier/DeliveryDetailsScreen/DeliveryDetails';
 
 const lightColors = AppConfig.lightColors.default;
 const darkColors = AppConfig.darkColors.default;
@@ -133,6 +134,12 @@ function BottomTabsVariant() {
         initialParams={{
           pickupAddress: undefined,
         }}
+      />
+
+      <Tab.Screen
+        name={Routes.COURIER_DELIVERY_DETAILS}
+        component={DeliveryDetails}
+        initialParams={{pickupAddress: ''}}
       />
 
       <Tab.Screen name={Routes.RIDE} component={Ride} />

@@ -38,6 +38,21 @@ import {LocalStorageSet} from '../../localStorage';
 const assets = AppConfig.assets.default;
 
 const MyAddress = props => {
+  const {
+    pickupAddress,
+    pickupTitle,
+    dropOffTitle,
+    dropOffAddress,
+    pickupLat,
+    pickupLng,
+    dropOffLat,
+    dropOffLng,
+    subDistrictIdPickUp,
+    subDistrictIdDropOff,
+    idp,
+    idd,
+  } = props?.route?.params || {};
+
   //Theme based styling and colors
   const scheme = useColorScheme();
   const {colors} = useTheme();
@@ -251,6 +266,12 @@ const MyAddress = props => {
                           {item.savedAddress && (
                             <TouchableOpacity
                               onPress={() => {
+                                console.log(
+                                  'MyAddress----',
+                                  isPickupClicked,
+                                  '---',
+                                  isDropOffClicked,
+                                );
                                 if (isFromCourier) {
                                   if (isPickupClicked) {
                                     props.navigation.navigate(Routes.COURIER, {
@@ -266,13 +287,13 @@ const MyAddress = props => {
                                       idp: item?.addressId,
                                       subDistrictTitle: item?.subDistrict,
                                       subDistrictIdPickUp: item.subDistrictId,
-                                      dropOffTitle: '',
-                                      dropOffAddress: '',
-                                      dropOffLat: 0.0,
-                                      dropOffLng: 0.0,
-                                      idd: 0,
-                                      subDistrictTitle: '',
-                                      subDistrictIdDropOff: 0,
+                                      dropOffTitle: dropOffTitle, // Maintain the existing drop-off state
+                                      dropOffAddress: dropOffAddress, // Maintain the existing drop-off state
+                                      dropOffLat: dropOffLat, // Maintain the existing drop-off state
+                                      dropOffLng: dropOffLng, // Maintain the existing drop-off state
+                                      idd: idd, // Maintain the existing drop-off state
+                                      subDistrictIdDropOff:
+                                        subDistrictIdDropOff, // Maintain the existing drop-off state
                                       isAgainChangeAddress:
                                         isAgainChangeAddress,
                                     });
@@ -290,6 +311,12 @@ const MyAddress = props => {
                                       idd: item?.addressId,
                                       subDistrictTitle: item?.subDistrict,
                                       subDistrictIdDropOff: item.subDistrictId,
+                                      pickupTitle: pickupTitle, // Maintain the existing pickup state
+                                      pickupAddress: pickupAddress, // Maintain the existing pickup state
+                                      pickupLat: pickupLat, // Maintain the existing pickup state
+                                      pickupLng: pickupLng, // Maintain the existing pickup state
+                                      idp: idp, // Maintain the existing pickup state
+                                      subDistrictIdPickUp: subDistrictIdPickUp, // Maintain the existing pickup state
                                     });
                                   }
                                 }

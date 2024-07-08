@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
+import React, {useRef, useState, useEffect, useMemo} from 'react';
 import {
   Image,
   ToastAndroid,
@@ -10,25 +10,25 @@ import {
   Linking,
   TouchableOpacity,
 } from 'react-native';
-import { Tooltip, Text } from 'react-native-elements';
+import {Tooltip, Text} from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BaseView from '../../../BaseView';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import IconNames from '../../../../../branding/carter/assets/IconNames';
 import colors from '../../../../../branding/carter/styles/light/Colors';
-import { SvgIcon } from '../../../../components/Application/SvgIcon/View';
+import {SvgIcon} from '../../../../components/Application/SvgIcon/View';
 import Routes from '../../../../navigation/Routes';
-import { useTheme } from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 
 import AppConfig from '../../../../../branding/App_config';
 import AppInput from '../../../../components/Application/AppInput/View';
 
-import { commonDarkStyles } from '../../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../../branding/carter/styles/light/Style';
-import { Styles } from '../Styles';
+import {commonDarkStyles} from '../../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../../branding/carter/styles/light/Style';
+import {Styles} from '../Styles';
 import DropDownItem from '../../../../components/Application/DropDownItem/View';
 import {
   AuthService,
@@ -36,33 +36,33 @@ import {
   ProductService,
   TrackService,
 } from '../../../../apis/services';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-import MapView, { Marker, Polygon, Polyline } from 'react-native-maps';
+import MapView, {Marker, Polygon, Polyline} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import AppButton from '../../../../components/Application/AppButton/View';
-import { useTranslation } from 'react-i18next';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
-import { useFocusEffect } from '@react-navigation/native';
-import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
-import { RadioButton } from 'react-native-paper';
+import {useTranslation} from 'react-i18next';
+import {heightPercentageToDP} from 'react-native-responsive-screen';
+import {useFocusEffect} from '@react-navigation/native';
+import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
+import {RadioButton} from 'react-native-paper';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Globals from '../../../../utils/Globals';
 import axios from 'axios';
-import { formatNumberWithCommas } from '../../../../utils/FormatNumberWithCommas';
+import {formatNumberWithCommas} from '../../../../utils/FormatNumberWithCommas';
 import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
-import { color } from 'react-native-reanimated';
+import {color} from 'react-native-reanimated';
 
 const fonts = AppConfig.fonts.default;
 const Typography = AppConfig.typography.default;
 
-export const DeliveryDetails = props => {
+const DeliveryDetails = props => {
   let time, interval;
 
   //style
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, scheme, colors);
@@ -70,7 +70,7 @@ export const DeliveryDetails = props => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   //translation
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
 
   //useRef
   const mapViewRef = useRef(null);
@@ -134,7 +134,7 @@ export const DeliveryDetails = props => {
 
   const [isStart, setIsStart] = useState(false);
   const updateStateForStart = data =>
-    setIsStart(state => ({ ...state, ...data }));
+    setIsStart(state => ({...state, ...data}));
 
   //Props
 
@@ -179,8 +179,8 @@ export const DeliveryDetails = props => {
     interIsLandShippingCost,
   } = props?.route?.params;
 
-  const pickupLocation = { latitude: pickupLat, longitude: pickupLng };
-  const dropOffLocation = { latitude: dropOffLat, longitude: dropOffLng };
+  const pickupLocation = {latitude: pickupLat, longitude: pickupLng};
+  const dropOffLocation = {latitude: dropOffLat, longitude: dropOffLng};
 
   const _carousel = useRef();
 
@@ -219,7 +219,7 @@ export const DeliveryDetails = props => {
           ref={_carousel}
           //data={slider_data}
           data={bannersCarbonClick}
-          renderItem={({ item }) => {
+          renderItem={({item}) => {
             return (
               <TouchableOpacity
                 onPress={() => {
@@ -257,9 +257,9 @@ export const DeliveryDetails = props => {
     }
 
     const routeCoordinatesData = [
-      { latitude: pickupLat, longitude: pickupLng },
+      {latitude: pickupLat, longitude: pickupLng},
       // ... intermediate coordinates
-      { latitude: dropOffLat, longitude: dropOffLng },
+      {latitude: dropOffLat, longitude: dropOffLng},
     ];
 
     setRouteCoordinates(routeCoordinatesData);
@@ -268,7 +268,7 @@ export const DeliveryDetails = props => {
   useEffect(() => {
     if (mapViewRef.current) {
       mapViewRef.current.fitToCoordinates([pickupLocation, dropOffLocation], {
-        edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
+        edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
         animated: true,
       });
     }
@@ -305,7 +305,7 @@ export const DeliveryDetails = props => {
       getBank();
       if (mapViewRef.current) {
         mapViewRef.current.fitToCoordinates([pickupLocation, dropOffLocation], {
-          edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
+          edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
           animated: true,
         });
       }
@@ -377,7 +377,7 @@ export const DeliveryDetails = props => {
         //   data?.data?.payload,
         // );
         let newArray = data.data.payload.map(item => {
-          return { key: item.id, value: item.dimension };
+          return {key: item.id, value: item.dimension};
         });
         setDimensionsDropdown(newArray);
       } else {
@@ -393,30 +393,30 @@ export const DeliveryDetails = props => {
       const response = await PaymentService.getBankDetails(
         deliveryIn === 1
           ? fare +
-          applicationFee +
-          environmentalFee +
-          (coldStorageFee === undefined ? 0 : coldStorageFee)
+              applicationFee +
+              environmentalFee +
+              (coldStorageFee === undefined ? 0 : coldStorageFee)
           : deliveryIn === 2
-            ? applicationFee +
+          ? applicationFee +
             totalKgCost +
             environmentalFee +
             (coldStorageFee === undefined ? 0 : coldStorageFee)
-            : 0,
+          : 0,
       );
       if (response?.data?.isSuccess) {
         let newArray = response?.data.payload.map((item, key) => {
           return {
             key: key,
             value: (
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Image
-                  source={{ uri: `${Globals.imgBaseURL}${item.paymentImage}` }}
-                  style={{ width: 68, height: 18 }}
+                  source={{uri: `${Globals.imgBaseURL}${item.paymentImage}`}}
+                  style={{width: 68, height: 18}}
                   resizeMode="contain"
                 />
 
-                <Text style={{ marginLeft: 5 }}>{item.paymentName}</Text>
-                <Text style={{ marginLeft: 5 }}>{item.paymentMethod}</Text>
+                <Text style={{marginLeft: 5}}>{item.paymentName}</Text>
+                <Text style={{marginLeft: 5}}>{item.paymentMethod}</Text>
               </View>
             ),
             data: item.paymentCode,
@@ -440,13 +440,13 @@ export const DeliveryDetails = props => {
         deliveryIn === 1
           ? fare + applicationFee + environmentalFee + coldStorageFee
           : deliveryIn === 2
-            ? totalKgCost +
+          ? totalKgCost +
             applicationFee +
             environmentalFee +
             coldStorageFee +
             (isInterIsLand ? warehouseFee : 0) +
             (isInterIsLand ? interIsLandShippingCost : 0)
-            : 0,
+          : 0,
       ),
       paymentMethod: data?.paymentDetails?.paymentCode,
       merchantOrderId: merchantOrderId,
@@ -534,8 +534,8 @@ export const DeliveryDetails = props => {
 
   const MyComponent = () => {
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text style={{ marginLeft: 5 }}>Select bank transfer/e-wallet</Text>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Text style={{marginLeft: 5}}>Select bank transfer/e-wallet</Text>
       </View>
     );
   };
@@ -580,7 +580,7 @@ export const DeliveryDetails = props => {
         }
       } else {
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const handleBookDelivery = async () => {
@@ -618,11 +618,11 @@ export const DeliveryDetails = props => {
         deliveryIn == 1
           ? fare + applicationFee + environmentalFee + coldStorageFee
           : totalKgCost +
-          applicationFee +
-          environmentalFee +
-          coldStorageFee +
-          (isInterIsLand ? warehouseFee : 0) +
-          (isInterIsLand ? interIsLandShippingCost : 0),
+            applicationFee +
+            environmentalFee +
+            coldStorageFee +
+            (isInterIsLand ? warehouseFee : 0) +
+            (isInterIsLand ? interIsLandShippingCost : 0),
       totalDiscount: 0,
       serviceFee: deliveryIn == 1 ? serviceFee : 0,
       shippingFee: deliveryIn == 1 ? shippingFee : 0,
@@ -658,11 +658,11 @@ export const DeliveryDetails = props => {
         deliveryIn == 1
           ? fare + applicationFee + environmentalFee + coldStorageFee
           : totalKgCost +
-          applicationFee +
-          environmentalFee +
-          coldStorageFee +
-          (isInterIsLand ? warehouseFee : 0) +
-          (isInterIsLand ? interIsLandShippingCost : 0),
+            applicationFee +
+            environmentalFee +
+            coldStorageFee +
+            (isInterIsLand ? warehouseFee : 0) +
+            (isInterIsLand ? interIsLandShippingCost : 0),
       transactionId:
         checked == 'VA' ? await AsyncStorage.getItem('PaymentReference') : ' ',
       //transactionId: checked == 'VA' ? data?.PaymentReference : '',
@@ -711,7 +711,7 @@ export const DeliveryDetails = props => {
                 onPress: () => {
                   setModalVisible(false);
 
-                  props.navigation.navigate(Routes.MY_ORDERS, { hideBack: true });
+                  props.navigation.navigate(Routes.MY_ORDERS, {hideBack: true});
                   //dispatch(clearProducts());
                 },
               },
@@ -726,7 +726,7 @@ export const DeliveryDetails = props => {
         // setIsOrderPlaced(false);
         // console.log("isOrderplaced ---- else set", isOrderPlaced)
       }
-    } catch (error) { }
+    } catch (error) {}
   };
   const fetchDirections = async () => {
     try {
@@ -770,9 +770,9 @@ export const DeliveryDetails = props => {
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(toRad(lat1)) *
-      Math.cos(toRad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const d = r * c; // Distance in kilometers
     return d;
@@ -826,11 +826,11 @@ export const DeliveryDetails = props => {
           (deliveryIn == 1
             ? fare + applicationFee + environmentalFee + coldStorageFee
             : totalKgCost +
-            applicationFee +
-            environmentalFee +
-            coldStorageFee +
-            (isInterIsLand ? warehouseFee : 0) +
-            (isInterIsLand ? interIsLandShippingCost : 0)) > 10000
+              applicationFee +
+              environmentalFee +
+              coldStorageFee +
+              (isInterIsLand ? warehouseFee : 0) +
+              (isInterIsLand ? interIsLandShippingCost : 0)) > 10000
         ) {
           updateStateForStart(true);
           setModalVisible(true);
@@ -845,14 +845,14 @@ export const DeliveryDetails = props => {
         if (
           balance > 0 &&
           balance >=
-          (deliveryIn == 1
-            ? fare + applicationFee + environmentalFee + coldStorageFee
-            : totalKgCost +
-            applicationFee +
-            environmentalFee +
-            coldStorageFee +
-            (isInterIsLand ? warehouseFee : 0) +
-            (isInterIsLand ? interIsLandShippingCost : 0))
+            (deliveryIn == 1
+              ? fare + applicationFee + environmentalFee + coldStorageFee
+              : totalKgCost +
+                applicationFee +
+                environmentalFee +
+                coldStorageFee +
+                (isInterIsLand ? warehouseFee : 0) +
+                (isInterIsLand ? interIsLandShippingCost : 0))
         ) {
           // call Api for update wallet balance
           handleBookDelivery();
@@ -863,11 +863,11 @@ export const DeliveryDetails = props => {
             deliveryIn == 1
               ? fare + applicationFee + environmentalFee + coldStorageFee
               : totalKgCost +
-              applicationFee +
-              environmentalFee +
-              coldStorageFee +
-              (isInterIsLand ? warehouseFee : 0) +
-              (isInterIsLand ? interIsLandShippingCost : 0),
+                  applicationFee +
+                  environmentalFee +
+                  coldStorageFee +
+                  (isInterIsLand ? warehouseFee : 0) +
+                  (isInterIsLand ? interIsLandShippingCost : 0),
           );
           Alert.alert(
             'Insuffcient Wallet Balance',
@@ -875,7 +875,7 @@ export const DeliveryDetails = props => {
             [
               {
                 text: 'No',
-                onPress: () => { },
+                onPress: () => {},
                 style: 'cancel',
               },
               {
@@ -920,7 +920,7 @@ export const DeliveryDetails = props => {
         // console.log('getPickupTypeForInterCity------', data.data);
 
         let newArray = data.data.payload.map(item => {
-          return { key: item.id, value: item.name };
+          return {key: item.id, value: item.name};
         });
         setPickupTypeData(newArray);
         getDeliveryType();
@@ -930,7 +930,7 @@ export const DeliveryDetails = props => {
           ToastAndroid.LONG,
         );
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const getDeliveryType = async () => {
@@ -942,7 +942,7 @@ export const DeliveryDetails = props => {
       if (data.data.isSuccess) {
         // console.log('getDeliverTypeForInterCity------', data.data);
         let newArray = data.data.payload.map(item => {
-          return { key: item.id, value: item.name };
+          return {key: item.id, value: item.name};
         });
         setDeliveryTypeData(newArray);
         getTotalCostForInterCity();
@@ -952,7 +952,7 @@ export const DeliveryDetails = props => {
           ToastAndroid.LONG,
         );
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const getTotalCostForInterCity = async () => {
@@ -985,11 +985,11 @@ export const DeliveryDetails = props => {
           ToastAndroid.LONG,
         );
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const handleScrollToInput = position => {
-    scrollViewRef.current?.scrollTo({ y: position, animated: true });
+    scrollViewRef.current?.scrollTo({y: position, animated: true});
   };
 
   useEffect(() => {
@@ -1111,9 +1111,9 @@ export const DeliveryDetails = props => {
     <BaseView
       navigation={props.navigation}
       title={t('Delivery Details')}
-      headerWithBack={true}
+      //headerWithBack={true}
       onBackPress={() => {
-        props.navigation.navigate(Routes.COURIER)
+        props.navigation.navigate(Routes.COURIER);
       }}
       applyBottomSafeArea
       childView={() => {
@@ -1127,18 +1127,18 @@ export const DeliveryDetails = props => {
                 <Text style={screenStyles.headerText}>Location Details</Text>
 
                 <View style={screenStyles.Box}>
-                  <View style={{ marginBottom: 8 }}>
+                  <View style={{marginBottom: 8}}>
                     <Text style={screenStyles.BoxContent}>Pickup From</Text>
 
-                    <Text style={[screenStyles.BoxContent, { color: 'gray' }]}>
+                    <Text style={[screenStyles.BoxContent, {color: 'gray'}]}>
                       {pickupAddress}
                     </Text>
                   </View>
 
-                  <View style={{ marginBottom: 8 }}>
+                  <View style={{marginBottom: 8}}>
                     <Text style={screenStyles.BoxContent}>Deliver to</Text>
 
-                    <Text style={[screenStyles.BoxContent, { color: 'gray' }]}>
+                    <Text style={[screenStyles.BoxContent, {color: 'gray'}]}>
                       {dropOffAddress}
                     </Text>
                   </View>
@@ -1169,7 +1169,7 @@ export const DeliveryDetails = props => {
                       <Text
                         style={[
                           screenStyles.textDis,
-                          { fontFamily: fonts.RUBIK_MEDIUM },
+                          {fontFamily: fonts.RUBIK_MEDIUM},
                         ]}>
                         : {eta !== 0 ? eta : duration}
                       </Text>
@@ -1182,9 +1182,9 @@ export const DeliveryDetails = props => {
                 {/* map view start*/}
 
                 {pickupLat === 0 ||
-                  pickupLng === 0 ||
-                  dropOffLat === 0 ||
-                  dropOffLng === 0 ? (
+                pickupLng === 0 ||
+                dropOffLat === 0 ||
+                dropOffLng === 0 ? (
                   <Text>Error</Text>
                 ) : (
                   ButtonName == 'Make Payment' && (
@@ -1216,7 +1216,7 @@ export const DeliveryDetails = props => {
                           pinColor="green">
                           <Image
                             source={require('../../../../../branding/carter/assets/images/source.png')}
-                          // style={styles.markerImage}
+                            // style={styles.markerImage}
                           />
                         </Marker>
                         <Marker
@@ -1225,7 +1225,7 @@ export const DeliveryDetails = props => {
                           pinColor="tomato">
                           <Image
                             source={require('../../../../../branding/carter/assets/images/destination.png')}
-                          // style={styles.markerImage}
+                            // style={styles.markerImage}
                           />
                         </Marker>
                         {isInterIsLand && (
@@ -1401,14 +1401,14 @@ export const DeliveryDetails = props => {
                         </Text> */}
                         <Text style={screenStyles.headerSubtitleText}>
                           Package Name:{' '}
-                          <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                          <Text style={{color: 'black', fontWeight: 'bold'}}>
                             {packageName}
                           </Text>
                         </Text>
                         {isInterIsLand && (
                           <Text style={screenStyles.headerSubtitleText}>
                             Item Type:{' '}
-                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                            <Text style={{color: 'black', fontWeight: 'bold'}}>
                               {interIslandVal}
                             </Text>
                           </Text>
@@ -1416,21 +1416,21 @@ export const DeliveryDetails = props => {
                         <Text style={screenStyles.headerSubtitleText}>
                           {/* Package Type:{' '} */}
                           Types of Goods:{' '}
-                          <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                          <Text style={{color: 'black', fontWeight: 'bold'}}>
                             {Perishable ? 'Wet' : 'Dry'}
                           </Text>
                         </Text>
 
-                        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
                           <Text style={screenStyles.headerSubtitleText}>
                             Weight:{' '}
-                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                            <Text style={{color: 'black', fontWeight: 'bold'}}>
                               {packageWeight} {'kg'}{' '}
                             </Text>
                           </Text>
                           <Text style={screenStyles.headerSubtitleText}>
                             Quantity:{' '}
-                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                            <Text style={{color: 'black', fontWeight: 'bold'}}>
                               {packageQty}
                             </Text>
                           </Text>
@@ -1438,7 +1438,7 @@ export const DeliveryDetails = props => {
                         {deliveryIn == 2 && (
                           <Text style={screenStyles.headerSubtitleText}>
                             Delivery Method:{' '}
-                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                            <Text style={{color: 'black', fontWeight: 'bold'}}>
                               {optionId == 1 ? 'Fastest' : 'Cheapest'}
                             </Text>
                           </Text>
@@ -1577,7 +1577,7 @@ export const DeliveryDetails = props => {
                                   }}
                                 />
                                 {isPaymentSelected && (
-                                  <Text style={{ color: 'red' }}>
+                                  <Text style={{color: 'red'}}>
                                     Please select bank transfer/e-wallet
                                   </Text>
                                 )}
@@ -1706,7 +1706,7 @@ export const DeliveryDetails = props => {
                                   <Text style={screenStyles.subtotalLabelText}>
                                     Application + Environmental Fee
                                   </Text>
-                                  <TouchableOpacity onPress={() => { }}>
+                                  <TouchableOpacity onPress={() => {}}>
                                     <Tooltip
                                       popover={
                                         <Text
@@ -1733,7 +1733,7 @@ export const DeliveryDetails = props => {
                                         type={IconNames.Info}
                                         width={17}
                                         height={17}
-                                        style={{ marginLeft: 3 }}
+                                        style={{marginLeft: 3}}
                                       />
                                     </Tooltip>
                                   </TouchableOpacity>
@@ -1805,7 +1805,7 @@ export const DeliveryDetails = props => {
                                   <Text style={screenStyles.subtotalLabelText}>
                                     Application + Environmental Fee
                                   </Text>
-                                  <TouchableOpacity onPress={() => { }}>
+                                  <TouchableOpacity onPress={() => {}}>
                                     <Tooltip
                                       popover={
                                         <Text
@@ -1832,7 +1832,7 @@ export const DeliveryDetails = props => {
                                         type={IconNames.Info}
                                         width={17}
                                         height={17}
-                                        style={{ marginLeft: 3, }}
+                                        style={{marginLeft: 3}}
                                         color={colors.activeColor}
                                       />
                                     </Tooltip>
@@ -1850,7 +1850,7 @@ export const DeliveryDetails = props => {
                           )}
 
                           <View
-                            style={[screenStyles.divider, { marginTop: 8 }]}
+                            style={[screenStyles.divider, {marginTop: 8}]}
                           />
 
                           {deliveryIn === 1 && (
@@ -1861,14 +1861,14 @@ export const DeliveryDetails = props => {
                               <Text
                                 style={[
                                   screenStyles.totalValueText,
-                                  { color: colors.activeColor },
+                                  {color: colors.activeColor},
                                 ]}>
                                 Rp.{' '}
                                 {formatNumberWithCommas(
                                   fare +
-                                  applicationFee +
-                                  environmentalFee +
-                                  coldStorageFee,
+                                    applicationFee +
+                                    environmentalFee +
+                                    coldStorageFee,
                                 )}
                               </Text>
                             </View>
@@ -1882,18 +1882,18 @@ export const DeliveryDetails = props => {
                               <Text
                                 style={[
                                   screenStyles.totalValueText,
-                                  { color: colors.activeColor },
+                                  {color: colors.activeColor},
                                 ]}>
                                 Rp.{' '}
                                 {formatNumberWithCommas(
                                   applicationFee +
-                                  totalKgCost +
-                                  environmentalFee +
-                                  coldStorageFee +
-                                  (isInterIsLand ? warehouseFee : 0) +
-                                  (isInterIsLand
-                                    ? interIsLandShippingCost
-                                    : 0),
+                                    totalKgCost +
+                                    environmentalFee +
+                                    coldStorageFee +
+                                    (isInterIsLand ? warehouseFee : 0) +
+                                    (isInterIsLand
+                                      ? interIsLandShippingCost
+                                      : 0),
                                 )}
                               </Text>
                             </View>
@@ -1905,7 +1905,7 @@ export const DeliveryDetails = props => {
                 )}
               </View>
             </ScrollView>
-            <View style={{ marginBottom: 0 }}>
+            <View style={{marginBottom: 0}}>
               {/* --------------------Continue Button-------------------------------------------------- */}
               {pickupAddress === '' || dropOffAddress === '' ? (
                 <Text></Text>
@@ -1936,15 +1936,15 @@ export const DeliveryDetails = props => {
                       {minutes > 0 || (minutes === 0 && second > 0)
                         ? 'Transaction Request'
                         : data?.checkTransactionStatus == '00'
-                          ? 'Transaction Request'
-                          : 'Transaction Request Failed'}
+                        ? 'Transaction Request'
+                        : 'Transaction Request Failed'}
                     </Text>
                     <Text style={screenStyles.modalSubTitleText}>
                       {minutes > 0 || (minutes === 0 && second > 0)
                         ? "Transaction is begin processed, please wait.. don't tap back or exit app."
                         : data?.checkTransactionStatus == '00'
-                          ? "Transaction is begin processed, please wait.. don't tap back or exit app."
-                          : 'Please tap on retry to generate new virtual code.'}
+                        ? "Transaction is begin processed, please wait.. don't tap back or exit app."
+                        : 'Please tap on retry to generate new virtual code.'}
                     </Text>
                     <View
                       style={{
@@ -1972,8 +1972,8 @@ export const DeliveryDetails = props => {
                           borderRadius: 8,
                           alignSelf: 'center',
                         }}>{`${minutes.toString().padStart(2, '0')}:${second
-                          .toString()
-                          .padStart(2, '0')}`}</Text>
+                        .toString()
+                        .padStart(2, '0')}`}</Text>
                     </View>
                     <View
                       style={{
@@ -1986,13 +1986,13 @@ export const DeliveryDetails = props => {
                         paddingHorizontal: 12,
                         backgroundColor: 'white',
                       }}>
-                      <View style={{ flex: 2 }}>
-                        <View style={{ flexDirection: 'row' }}>
+                      <View style={{flex: 2}}>
+                        <View style={{flexDirection: 'row'}}>
                           <Image
                             source={{
                               uri: `${data?.paymentDetails?.paymentImage}`,
                             }}
-                            style={{ width: 68, height: 18 }}
+                            style={{width: 68, height: 18}}
                             resizeMode="contain"
                           />
                           <Text
@@ -2015,14 +2015,14 @@ export const DeliveryDetails = props => {
                               minutes > 0 || (minutes === 0 && second > 0)
                                 ? colors.headingColor
                                 : data?.checkTransactionStatus == '00'
-                                  ? colors.activeColor
-                                  : colors.red,
+                                ? colors.activeColor
+                                : colors.red,
                           }}>
                           {minutes > 0 || (minutes === 0 && second > 0)
                             ? data.PaymentRefNumber
                             : data?.checkTransactionStatus == '00'
-                              ? 'Transaction success'
-                              : 'Transaction failed,Please retry'}
+                            ? 'Transaction success'
+                            : 'Transaction failed,Please retry'}
                         </Text>
                       </View>
 
@@ -2100,3 +2100,4 @@ export const DeliveryDetails = props => {
     />
   );
 };
+export default DeliveryDetails;

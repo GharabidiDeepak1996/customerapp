@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   Alert,
   Image,
@@ -11,18 +11,18 @@ import {
 } from 'react-native';
 //test push
 
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { useNavigation, useTheme } from '@react-navigation/native';
-import { Styles } from './Styles';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {useNavigation, useTheme} from '@react-navigation/native';
+import {Styles} from './Styles';
 import Routes from '../../../navigation/Routes';
 import Globals from '../../../utils/Globals';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-import { Variant1Header } from '../Header/View';
+import {Variant1Header} from '../Header/View';
 import AppConfig from '../../../../branding/App_config';
-import { ProductService } from '../../../apis/services/product';
-import { CommomService, ShopService, TrackService } from '../../../apis/services';
+import {ProductService} from '../../../apis/services/product';
+import {CommomService, ShopService, TrackService} from '../../../apis/services';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const Typography = AppConfig.typography.default;
@@ -32,21 +32,20 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
+import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
-import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 import AppInput from '../../../components/Application/AppInput/View';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import { RadioButton } from 'react-native-paper';
-import { SvgIcon } from '../../../components/Application/SvgIcon/View';
-import { formatNumberWithCommas } from '../../../utils/FormatNumberWithCommas';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
+import {RadioButton} from 'react-native-paper';
+import {SvgIcon} from '../../../components/Application/SvgIcon/View';
+import {formatNumberWithCommas} from '../../../utils/FormatNumberWithCommas';
 import DropDownItem from '../../../components/Application/DropDownItem/View';
 import axios from 'axios';
 
 //Constants
-
 
 export const Courier = props => {
   //Props
@@ -68,14 +67,14 @@ export const Courier = props => {
 
   //Theme based styling and colors
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, scheme, colors);
 
   //navigation and translation
   const navigation = useNavigation();
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
 
   //useRef
   let inputRef = useRef();
@@ -88,7 +87,7 @@ export const Courier = props => {
   const [deliveryIn, setDeliveryIn] = useState(0);
   let [isService, setIsService] = useState(true);
   const [bannersCarbonClick, setBannersCarbonClick] = useState([]);
-  const [data, setData] = useState({ packageWeight: 0 });
+  const [data, setData] = useState({packageWeight: 0});
   const [routeRate, setRouteRate] = useState();
   const [validRoute, setValidRoute] = useState();
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -114,7 +113,6 @@ export const Courier = props => {
     state => state.dashboard.MinimumSendDistance,
   );
 
-
   useEffect(() => {
     getDashBoardBanners();
 
@@ -123,7 +121,7 @@ export const Courier = props => {
       fetchDirections();
     }
 
-    return () => { };
+    return () => {};
   }, [pickupLat, pickupLng, dropOffLat, dropOffLng, deliveryIn]);
 
   const fetchDirections = async () => {
@@ -178,9 +176,10 @@ export const Courier = props => {
             setIsService(false);
 
             Alert.alert(
-              `Pick-up and drop locations are too ${leg.distance.value < 1000
-                ? 'near'
-                : leg.distance.value > MaxSendDistance * 1000
+              `Pick-up and drop locations are too ${
+                leg.distance.value < 1000
+                  ? 'near'
+                  : leg.distance.value > MaxSendDistance * 1000
                   ? 'far'
                   : ''
               } (${leg.distance.text})`,
@@ -424,7 +423,7 @@ export const Courier = props => {
 
   const scrollToBottom = possition => {
     if (scrollViewRef.current) {
-      scrollViewRef.current?.scrollTo({ y: possition, animated: true });
+      scrollViewRef.current?.scrollTo({y: possition, animated: true});
     }
   };
 
@@ -678,8 +677,8 @@ export const Courier = props => {
     }));
   };
 
-  const handleKeyPress = ({ nativeEvent }) => {
-    const { key } = nativeEvent;
+  const handleKeyPress = ({nativeEvent}) => {
+    const {key} = nativeEvent;
 
     // Check if the pressed key is the backspace key
     if (key === 'Backspace') {
@@ -718,8 +717,8 @@ export const Courier = props => {
 
   const MyComponent = () => {
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text style={{ marginLeft: 5 }}>Select item type</Text>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Text style={{marginLeft: 5}}>Select item type</Text>
       </View>
     );
   };
@@ -745,7 +744,7 @@ export const Courier = props => {
     <View
       style={[
         screenStyles.mainWrapper,
-        { paddingTop: Globals.SAFE_AREA_INSET.top },
+        {paddingTop: Globals.SAFE_AREA_INSET.top},
       ]}>
       <LinearGradient
         //colors={[colors.buttonBackground, '#31b5e7', '#b0eeff']}
@@ -765,20 +764,18 @@ export const Courier = props => {
         scrollEnabled={true}
         ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
-        style={{ width: '90%' }}>
+        style={{width: '90%'}}>
         {/* Banner */}
         <View style={screenStyles.promotionSliderContainer}>
           <Carousel
             ref={_carousel}
             data={bannersCarbonClick}
-            renderItem={({ item }) => {
+            renderItem={({item}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
                     // props.navigation.navigate(Routes.POPULAR_DEALS);
-                  }
-                  }
-                >
+                  }}>
                   <Image
                     source={{
                       uri: `${Globals.imgBaseURL}/${item.imageUrl}`,
@@ -816,7 +813,7 @@ export const Courier = props => {
         </View>
 
         <View style={screenStyles.containerTrackPackage}>
-          <View style={{ flex: 0.2, alignSelf: 'center' }}>
+          <View style={{flex: 0.2, alignSelf: 'center'}}>
             <Text
               style={[
                 screenStyles.sectionHeadingText,
@@ -828,10 +825,10 @@ export const Courier = props => {
               Track
             </Text>
 
-            <Text style={{ fontSize: 10, color: 'white' }}>Package</Text>
+            <Text style={{fontSize: 10, color: 'white'}}>Package</Text>
           </View>
-          <View style={{ flex: 1 }}>
-            <View style={{ flexDirection: 'row' }}>
+          <View style={{flex: 1}}>
+            <View style={{flexDirection: 'row'}}>
               <Text style={screenStyles.containerEnterTrack}>ASLX</Text>
               <AppInput
                 {...globalStyles.secondaryInputStyle}
@@ -840,7 +837,7 @@ export const Courier = props => {
                 // leftIcon={IconNames.Search}
                 placeholder={t('Enter tracking #')}
                 value={data?.trackNo}
-                containerStyle={{ borderRadius: 0, flex: 1 }}
+                containerStyle={{borderRadius: 0, flex: 1}}
                 keyboardType={'default'}
                 maxLength={15}
                 onChangeText={val => {
@@ -890,7 +887,7 @@ export const Courier = props => {
           </View>
         </View>
 
-        <View style={{ width: '100%' }}>
+        <View style={{width: '100%'}}>
           <Text
             style={{
               fontFamily: Fonts.RUBIK_MEDIUM,
@@ -953,7 +950,7 @@ export const Courier = props => {
                     justifyContent: 'space-between',
                     flexDirection: 'row',
                   }}>
-                  <Text style={{ color: 'black' }}>{t('Pick up from')}</Text>
+                  <Text style={{color: 'black'}}>{t('Pick up from')}</Text>
 
                   <TouchableOpacity
                     onPress={() => {
@@ -1010,7 +1007,7 @@ export const Courier = props => {
                     flexDirection: 'row',
                     marginBottom: 10,
                   }}>
-                  <Text style={{ marginStart: 0, color: 'black' }}>
+                  <Text style={{marginStart: 0, color: 'black'}}>
                     {pickupTitle}
                   </Text>
                 </View>
@@ -1028,6 +1025,12 @@ export const Courier = props => {
                     isDropOffClicked: true,
                     isNew: false,
                     isAgainChangeAddress: false,
+                    pickupTitle: pickupTitle, // Maintain the existing
+                    pickupAddress: pickupAddress, // Maintain the existing
+                    pickupLat: pickupLat, // Maintain the existing
+                    pickupLng: pickupLng, // Maintain the existing
+                    idp: idp, // Maintain the existing
+                    subDistrictIdPickUp: subDistrictIdPickUp, // Maintain the existing
                   });
                 }}>
                 <View
@@ -1073,6 +1076,12 @@ export const Courier = props => {
                         isDropOffClicked: true,
                         isNew: false,
                         isAgainChangeAddress: false,
+                        pickupTitle: pickupTitle, // Maintain the existing
+                        pickupAddress: pickupAddress, // Maintain the existing
+                        pickupLat: pickupLat, // Maintain the existing
+                        pickupLng: pickupLng, // Maintain the existing
+                        idp: idp, // Maintain the existing
+                        subDistrictIdPickUp: subDistrictIdPickUp, // Maintain the existing
                       });
                       setData(prevData => ({
                         ...prevData,
@@ -1101,7 +1110,7 @@ export const Courier = props => {
                     borderWidth: 1,
                     flexDirection: 'row',
                   }}>
-                  <Text style={{ marginStart: 0, color: 'black' }}>
+                  <Text style={{marginStart: 0, color: 'black'}}>
                     {dropOffTitle}
                   </Text>
                 </View>
@@ -1133,7 +1142,7 @@ export const Courier = props => {
                     flex: 1,
                     marginBottom: perishableError ? 0 : 15,
                   }}>
-                  <View style={{ flex: 0.5 }}>
+                  <View style={{flex: 0.5}}>
                     <View
                       style={{
                         flexDirection: 'row',
@@ -1159,7 +1168,7 @@ export const Courier = props => {
                     </View>
                   </View>
 
-                  <View style={{ flex: 0.5 }}>
+                  <View style={{flex: 0.5}}>
                     <View
                       style={{
                         flexDirection: 'row',
@@ -1187,7 +1196,7 @@ export const Courier = props => {
                 </View>
 
                 {perishableError && (
-                  <Text style={{ color: 'red', marginBottom: 15 }}>
+                  <Text style={{color: 'red', marginBottom: 15}}>
                     Please select item type you want to send
                   </Text>
                 )}
@@ -1221,7 +1230,7 @@ export const Courier = props => {
                 />
 
                 {isPackageNameError && (
-                  <Text style={{ color: 'red' }}>Enter package name</Text>
+                  <Text style={{color: 'red'}}>Enter package name</Text>
                 )}
               </View>
 
@@ -1268,9 +1277,9 @@ export const Courier = props => {
                 )}
 
               {/* Quality and weight */}
-              <View style={{ flexDirection: 'row', flex: 1 }}>
+              <View style={{flexDirection: 'row', flex: 1}}>
                 {/* Quality */}
-                <View style={{ flex: 1, marginRight: 2 }}>
+                <View style={{flex: 1, marginRight: 2}}>
                   <AppInput
                     textInputRef={r => (inputRef = r)}
                     showLeftIcon={false}
@@ -1306,12 +1315,12 @@ export const Courier = props => {
                   />
 
                   {isPackageQantityError && (
-                    <Text style={{ color: 'red' }}>Qantity is required</Text>
+                    <Text style={{color: 'red'}}>Qantity is required</Text>
                   )}
                 </View>
 
                 {/* Weight */}
-                <View style={{ flex: 1, marginLeft: 2 }}>
+                <View style={{flex: 1, marginLeft: 2}}>
                   <AppInput
                     textInputRef={r => (inputRef = r)}
                     showLeftIcon={false}
@@ -1365,7 +1374,7 @@ export const Courier = props => {
                   />
 
                   {isPackageWeightError && (
-                    <Text style={{ color: 'red' }}>Weight is required</Text>
+                    <Text style={{color: 'red'}}>Weight is required</Text>
                   )}
                 </View>
               </View>
@@ -1390,7 +1399,7 @@ export const Courier = props => {
                     <Text
                       style={[
                         screenStyles.sectionHeadingText,
-                        { color: 'white' },
+                        {color: 'white'},
                       ]}>
                       Find the rates
                     </Text>
@@ -1402,9 +1411,9 @@ export const Courier = props => {
 
           {/* Text Rate */}
           {isBackPressed &&
-            data?.packageWeight != 0 &&
-            routeRate?.rate?.cost != 0 &&
-            deliveryIn == 2 ? (
+          data?.packageWeight != 0 &&
+          routeRate?.rate?.cost != 0 &&
+          deliveryIn == 2 ? (
             <Text
               style={{
                 fontFamily: Fonts.RUBIK_MEDIUM,
@@ -1431,7 +1440,7 @@ export const Courier = props => {
                   alignItems: 'center',
                   alignSelf: 'center',
                 }}>
-                <View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
                   {routeRate?.fastestRate?.totalKgCost !== 0 && (
                     <View
                       style={{
@@ -1630,12 +1639,12 @@ export const Courier = props => {
 
           {/* Please select rate*/}
           {isRateSelectedd && data.packageWeight !== 0 && (
-            <Text style={{ color: 'red' }}>Please select rate</Text>
+            <Text style={{color: 'red'}}>Please select rate</Text>
           )}
 
           {/* Button Next*/}
           {isBackPressed && data?.packageWeight != 0 && (
-            <View style={{ marginBottom: 23 }}>
+            <View style={{marginBottom: 23}}>
               <TouchableOpacity
                 onPress={() => {
                   goToNextPage();
@@ -1652,7 +1661,7 @@ export const Courier = props => {
                     justifyContent: 'center',
                   }}>
                   <Text
-                    style={[screenStyles.sectionHeadingText, { color: 'white' }]}>
+                    style={[screenStyles.sectionHeadingText, {color: 'white'}]}>
                     Next
                   </Text>
                 </View>
