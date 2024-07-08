@@ -53,6 +53,7 @@ import {Courier} from './src/screens/Variant1/Courier/View';
 import {Ride} from './src/screens/Variant1/Courier copy/View';
 import {Variant1Profile} from './src/screens/Variant1/Profile/View';
 import Variant3BottomTabBar from './src/components/Application/Variant3BottomTabBar/View';
+import MyAddress from './src/screens/MyAddress/View';
 
 const lightColors = AppConfig.lightColors.default;
 const darkColors = AppConfig.darkColors.default;
@@ -221,6 +222,7 @@ export function RootStack() {
           name={Routes.HOME_VARIANT1}
           component={BottomTabsVariant}
         />
+        <Stack.Screen name={Routes.My_Address} component={MyAddress} />
       </Stack.Navigator>
     </View>
   );

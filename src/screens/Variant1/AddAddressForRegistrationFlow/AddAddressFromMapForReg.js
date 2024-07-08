@@ -2,7 +2,7 @@ import {View, Text, SafeAreaView, StyleSheet, ToastAndroid} from 'react-native';
 import React, {useRef, useState} from 'react';
 import BaseView from '../../BaseView';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-//import {SvgIcon} from '../../../components/Application/SvgIcon/View';
+import {SvgIcon} from '../../../components/Application/SvgIcon/View';
 import {useTheme} from '@react-navigation/native';
 import {Button} from 'react-native-elements';
 import {Styles} from './Style';
@@ -198,12 +198,12 @@ const AddAddressFromMapForReg = props => {
                     justifyContent: 'space-between',
                   }}>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    {/* <SvgIcon //comment
+                    <SvgIcon
                       type={IconNames.MapMarkerAlt}
                       width={14}
                       height={14}
                       color={colors.primaryGreenColor}
-                    /> */}
+                    />
 
                     <Text
                       style={{
@@ -226,12 +226,12 @@ const AddAddressFromMapForReg = props => {
                         style={{
                           flexDirection: 'row',
                         }}>
-                        {/* <SvgIcon //comment
+                        <SvgIcon
                           type={IconNames.Pencil}
                           width={12}
                           height={12}
                           color={colors.primaryGreenColor}
-                        /> */}
+                        />
 
                         <Text
                           style={{

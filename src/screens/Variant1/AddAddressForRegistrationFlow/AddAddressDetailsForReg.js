@@ -10,7 +10,7 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import BaseView from '../../BaseView';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-//import {SvgIcon} from '../../../components/Application/SvgIcon/View';
+import {SvgIcon} from '../../../components/Application/SvgIcon/View';
 import {useTheme} from '@react-navigation/native';
 import {Button, CheckBox} from 'react-native-elements';
 import AppConfig from '../../../../branding/App_config';
@@ -347,12 +347,12 @@ const AddAddressDetailsForReg = props => {
                 <View style={{flex: 1, flexDirection: 'column'}}>
                   <View style={{flex: 1, margin: 20}}>
                     <View style={{flexDirection: 'row'}}>
-                      {/* <SvgIcon  --comment
+                      <SvgIcon
                         type={IconNames.MapMarkerAlt}
                         width={22}
                         height={22}
                         color={colors.primaryGreenColor}
-                      /> */}
+                      />
 
                       <Text
                         style={{
@@ -778,42 +778,6 @@ const AddAddressDetailsForReg = props => {
                         {t('Please enter save as')}
                       </Text>
                     )}
-
-                    {/* <CheckBox
-                    title="Set as default"
-                    checked={defaultAddress}
-                    textStyle={{
-                      fontSize: Typography.P5,
-                      marginStart: 5,
-                      fontFamily: fonts.RUBIK_REGULAR,
-                      color: 'gray',
-                    }}
-                    containerStyle={{
-                      backgroundColor: 'transparent',
-                      borderColor: 'transparent',
-                      margin: 0,
-                      padding: 6,
-                      paddingStart: 0,
-                      marginStart: 0,
-                    }}
-                    onPress={() => setAsDefaultAddress(!defaultAddress)}
-                    checkedIcon={
-                      <SvgIcon
-                        type={IconNames.CheckCircle}
-                        width={22}
-                        height={22}
-                        color={colors.primaryGreenColor}
-                      />
-                    }
-                    uncheckedIcon={
-                      <SvgIcon
-                        type={IconNames.CheckCircle}
-                        width={20}
-                        height={20}
-                        color={colors.headerPrimaryColor}
-                      />
-                    }
-                  /> */}
                   </View>
                 </View>
               </KeyboardAwareScrollView>

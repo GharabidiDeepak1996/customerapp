@@ -25,7 +25,7 @@ import {useTranslation} from 'react-i18next';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useFocusEffect} from '@react-navigation/native';
 import CountryPicker from 'react-native-country-picker-modal';
-//import {SvgIcon} from '../../../components/Application/SvgIcon/View';
+import {SvgIcon} from '../../../components/Application/SvgIcon/View';
 
 const fonts = AppConfig.fonts.default;
 const assets = AppConfig.assets.default;
@@ -371,12 +371,12 @@ const Variant1SignupScreen = props => {
                       </Text>
 
                       {/* comment */}
-                      {/* <SvgIcon
-                      type={IconNames.ChevronDown}
-                      width={15}
-                      height={15}
-                      color={colors.inputColor}
-                    /> */}
+                      <SvgIcon
+                        type={IconNames.ChevronDown}
+                        width={15}
+                        height={15}
+                        color={colors.inputColor}
+                      />
                     </TouchableOpacity>
                   </View>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   ScrollView,
   useColorScheme,
@@ -17,30 +17,30 @@ import {
 import BaseView from '../BaseView';
 import Routes from '../../navigation/Routes';
 import Globals from '../../utils/Globals';
-import { AddressItem } from '../../components/Application/AddressItem/View';
+import {AddressItem} from '../../components/Application/AddressItem/View';
 import AppButton from '../../components/Application/AppButton/View';
-import { Styles } from './Styles';
-import { useTheme } from '@react-navigation/native';
+import {Styles} from './Styles';
+import {useTheme} from '@react-navigation/native';
 import IconNames from '../../../branding/carter/assets/IconNames';
-import { AddressContentItem } from '../../components/Application/AddressContentItem/View';
+import {AddressContentItem} from '../../components/Application/AddressContentItem/View';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { SvgIcon } from '../../components/Application/SvgIcon/View';
+import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
+import {SvgIcon} from '../../components/Application/SvgIcon/View';
 import AppConfig from '../../../branding/App_config';
 const Fonts = AppConfig.fonts.default;
 const Typography = AppConfig.typography.default;
 const baseUrl = Globals.baseUrl;
-import { useFocusEffect } from '@react-navigation/native';
-import { Image } from 'react-native';
-import { t } from 'i18next';
-import { LocalStorageSet } from '../../localStorage';
+import {useFocusEffect} from '@react-navigation/native';
+import {Image} from 'react-native';
+import {t} from 'i18next';
+import {LocalStorageSet} from '../../localStorage';
 const assets = AppConfig.assets.default;
 
-export const MyAddress = props => {
+const MyAddress = props => {
   //Theme based styling and colors
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const screenStyles = Styles(scheme, colors);
   const [data, setListAddress] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -56,7 +56,6 @@ export const MyAddress = props => {
 
   const [filteredData, setFilteredData] = useState(data);
   const [searchQuery, setSearchQuery] = useState('');
-
 
   console.log('isFromCourier--------------', isFromCourier);
 
@@ -127,7 +126,6 @@ export const MyAddress = props => {
           console.log('payloaddd:', response.data.payload);
           setListAddress(response.data.payload);
           setFilteredData(response.data.payload);
-
         }
       })
       .catch(error => {
@@ -162,14 +160,15 @@ export const MyAddress = props => {
     }, []),
   );
 
-  const handleSearch = (query) => {
+  const handleSearch = query => {
     setSearchQuery(query);
     if (query) {
-      const newData = data.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.address1.toLowerCase().includes(query.toLowerCase()) ||
-        item.address2.toLowerCase().includes(query.toLowerCase()) ||
-        item.mapAddress.toLowerCase().includes(query.toLowerCase())
+      const newData = data.filter(
+        item =>
+          item.title.toLowerCase().includes(query.toLowerCase()) ||
+          item.address1.toLowerCase().includes(query.toLowerCase()) ||
+          item.address2.toLowerCase().includes(query.toLowerCase()) ||
+          item.mapAddress.toLowerCase().includes(query.toLowerCase()),
       );
       setFilteredData(newData);
     } else {
@@ -181,7 +180,7 @@ export const MyAddress = props => {
     <BaseView
       navigation={props.navigation}
       title={t('My Address Book')}
-      rightIcon={IconNames.PlusCircle}
+      //rightIcon={IconNames.PlusCircle}
       onRightIconPress={() => {
         props.navigation.navigate(Routes.PLACES_AUTO_COMPLETE, {
           isNew: isNew,
@@ -192,9 +191,9 @@ export const MyAddress = props => {
           isDropOffClicked: props.route.params.isDropOffClicked,
         });
       }}
-      headerWithBack
+      // headerWithBack
       onBackPress={() => {
-        props.navigation.goBack()
+        props.navigation.goBack();
       }}
       applyBottomSafeArea
       childView={() => {
@@ -204,7 +203,7 @@ export const MyAddress = props => {
               <ActivityIndicator
                 color={colors.activeColor}
                 size="large"
-                style={{ flex: 1 }}
+                style={{flex: 1}}
               />
             ) : data?.length === 0 ? (
               <View
@@ -232,20 +231,21 @@ export const MyAddress = props => {
               </View>
             ) : (
               <View>
-                {data?.length > 4 && <TextInput
-                  placeholder="Search Address"
-                  value={searchQuery}
-                  onChangeText={handleSearch}
-                  selectionColor={colors.activeColor}
-                  style={screenStyles.searchContainer}
-
-                />}
-                {filteredData.length != 0 && <ScrollView
-                  showsVerticalScrollIndicator={false}
-                //style={screenStyles.scrollViewContainer}
-                >
-                  {
-                    filteredData.map((item, key) => {
+                {data?.length > 3 && (
+                  <TextInput
+                    placeholder="Search Address"
+                    value={searchQuery}
+                    onChangeText={handleSearch}
+                    selectionColor={colors.activeColor}
+                    style={screenStyles.searchContainer}
+                  />
+                )}
+                {filteredData.length != 0 && (
+                  <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    //style={screenStyles.scrollViewContainer}
+                  >
+                    {filteredData.map((item, key) => {
                       return (
                         <View>
                           {item.savedAddress && (
@@ -273,7 +273,8 @@ export const MyAddress = props => {
                                       idd: 0,
                                       subDistrictTitle: '',
                                       subDistrictIdDropOff: 0,
-                                      isAgainChangeAddress: isAgainChangeAddress,
+                                      isAgainChangeAddress:
+                                        isAgainChangeAddress,
                                     });
                                   } else if (isDropOffClicked) {
                                     props.navigation.navigate(Routes.COURIER, {
@@ -374,11 +375,13 @@ export const MyAddress = props => {
                                                       title: item.title,
                                                       road: '',
                                                       state: item.province,
-                                                      subDistrict: item.subDistrict,
+                                                      subDistrict:
+                                                        item.subDistrict,
                                                       subDistrictId:
                                                         item.subDistrictId,
                                                       district: item.district,
-                                                      postalCode: item.postalCode,
+                                                      postalCode:
+                                                        item.postalCode,
                                                       isNew: false,
                                                       isEdit: true,
                                                       addressId: item.addressId,
@@ -467,15 +470,14 @@ export const MyAddress = props => {
                         </View>
                       );
                     })}
+                  </ScrollView>
+                )}
 
-
-                </ScrollView>}
-
-                {
-                  filteredData.length == 0 && <View>
+                {filteredData.length == 0 && (
+                  <View>
                     <Text>No data found.</Text>
                   </View>
-                }
+                )}
               </View>
             )}
           </View>
@@ -484,3 +486,5 @@ export const MyAddress = props => {
     />
   );
 };
+
+export default MyAddress;
