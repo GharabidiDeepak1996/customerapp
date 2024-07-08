@@ -1,42 +1,41 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ToastAndroid, useColorScheme, View, Alert } from 'react-native';
-import { Button, Image, Text } from 'react-native-elements';
+import React, {useEffect, useRef, useState} from 'react';
+import {ToastAndroid, useColorScheme, View, Alert} from 'react-native';
+import {Button, Image, Text} from 'react-native-elements';
 import AppConfig from '../../../../branding/App_config';
-import { Styles } from './Style';
-import AppHeader from '../../../components/Application/AppHeader/View';
+import {Styles} from './Style';
 import AppInput from '../../../components/Application/AppInput/View';
 import Routes from '../../../navigation/Routes';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import AppButton from '../../../components/Application/AppButton/View';
-import { CommonActions, useTheme } from '@react-navigation/native';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
+import {CommonActions, useTheme} from '@react-navigation/native';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-import { FocusAwareStatusBar } from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
-import { CountryPickerInput } from '../../../components/Application/CountryPickerInput/View';
+import {FocusAwareStatusBar} from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
+import {CountryPickerInput} from '../../../components/Application/CountryPickerInput/View';
 import BaseView from '../../BaseView';
 import DropDownItem from '../../../components/Application/DropDownItem/View';
-import { AuthService } from '../../../apis/services/Auth';
-import { useSafeArea } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
-import { doRegister } from './Service';
+import {AuthService} from '../../../apis/services/Auth';
+import {useSafeArea} from 'react-native-safe-area-context';
+import {useDispatch, useSelector} from 'react-redux';
+import {doRegister} from './Service';
 import DeviceInfo from 'react-native-device-info';
 import CryptoJS from 'crypto-js';
-import { useTranslation } from 'react-i18next';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useFocusEffect } from '@react-navigation/native';
+import {useTranslation} from 'react-i18next';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useFocusEffect} from '@react-navigation/native';
 import CountryPicker from 'react-native-country-picker-modal';
-import { SvgIcon } from '../../../components/Application/SvgIcon/View';
+//import {SvgIcon} from '../../../components/Application/SvgIcon/View';
 
 const fonts = AppConfig.fonts.default;
 const assets = AppConfig.assets.default;
 
-export const Variant1SignupScreen = props => {
-  const { t, i18n } = useTranslation();
+const Variant1SignupScreen = props => {
+  const {t, i18n} = useTranslation();
 
   //Theme based styling and colors
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, colors);
@@ -84,7 +83,7 @@ export const Variant1SignupScreen = props => {
   const scrollViewRef = useRef(null);
   const errorTextRef = useRef(null);
   const dispatch = useDispatch();
-  const { data, isLoading, isError } = useSelector(state => state.loginReducer);
+  const {data, isLoading, isError} = useSelector(state => state.loginReducer);
 
   const [addressForRegistration, setaddressForRegistration] = useState('');
   const [latitude, setlatitude] = useState(0);
@@ -136,85 +135,6 @@ export const Variant1SignupScreen = props => {
       setpostalCode(props.route.params.postalCode);
     }, [props.route.params.addressForRegistration]),
   );
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       let response = await AuthService.getProvince();
-  //       if (!response?.data?.isSuccess) {
-  //         ToastAndroid.show(
-  //           response?.data.message,
-  //           ToastAndroid.LONG,
-  //         );
-  //         return;
-  //       }
-  //       if (response?.data?.isSuccess) {
-  //         let newArray = response.data.payload.map(item => {
-  //           return { key: item.id, value: item.name };
-  //         });
-
-  //         setProvince(newArray); // Move this line inside the 'if' block
-  //       }
-  //     } catch (error) {
-  //       // Cast 'error' to 'any' to handle the TypeScript error
-  //       ToastAndroid.show(
-  //         'An error occurred while registering: ' + error.message,
-  //         ToastAndroid.LONG,
-  //       );
-  //     }
-  //   })();
-  // }, []);
-
-  // const getCity = async id => {
-  //   try {
-  //     let response = await AuthService.getCity(id);
-  //     if (!response?.data?.isSuccess) {
-  //       ToastAndroid.show(
-  //         response?.data.message || 'An error occurred during get City.',
-  //         ToastAndroid.LONG,
-  //       );
-  //       return;
-  //     }
-  //     if (response?.data?.isSuccess) {
-  //       let newArray = response?.data?.payload.map(item => {
-  //         return {key: item.id, value: item.name};
-  //       });
-  //       // return
-  //       setCity(newArray); // Move this line inside the 'if' block
-  //     }
-  //   } catch (error) {
-  //     // Cast 'error' to 'any' to handle the TypeScript error
-  //     ToastAndroid.show(
-  //       'An error occurred while CIty: ' + error.message,
-  //       ToastAndroid.LONG,
-  //     );
-  //   }
-  // };
-  // const getDistrict = async id => {
-  //   try {
-  //     let response = await AuthService.getDistrict(id);
-  //     if (!response?.data?.isSuccess) {
-  //       ToastAndroid.show(
-  //         response?.data.message || 'An error occurred during get District.',
-  //         ToastAndroid.LONG,
-  //       );
-  //       return;
-  //     }
-  //     if (response?.data?.isSuccess) {
-  //       // return
-  //       let newArray = response?.data?.payload.map(item => {
-  //         return {key: item.id, value: item.name};
-  //       });
-  //       setDistrict(newArray); // Move this line inside the 'if' block
-  //     }
-  //   } catch (error) {
-  //     // Cast 'error' to 'any' to handle the TypeScript error
-  //     ToastAndroid.show(
-  //       'An error occurred while District: ' + error.message,
-  //       ToastAndroid.LONG,
-  //     );
-  //   }
-  // };
 
   const handleRegister = async () => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -296,24 +216,6 @@ export const Variant1SignupScreen = props => {
       return;
     }
 
-    // if (selectedProvince == 0) {
-    //   setErrorProvince('Please select province');
-    //   setCheckProvince(true);
-    //   return;
-    // }
-
-    // if (selectedCity == 0) {
-    //   setErrorCity('Please select city');
-    //   setCheckCity(true);
-    //   return;
-    // }
-
-    // if (selectedDistrict == 0) {
-    //   setErrorSubDist('Please select sub district');
-    //   setCheckSubDist(true);
-    //   return;
-    // }
-
     const uniqueId = await DeviceInfo.getUniqueId();
     var date = new Date().toLocaleString();
     const hashedPassword = CryptoJS.SHA256(cnfPassword).toString();
@@ -380,67 +282,25 @@ export const Variant1SignupScreen = props => {
       // Cast 'error' to 'any' to handle the TypeScript error
       console.log('Error in handleRegister:', error);
     }
-    //========================================================================================
-    // try {
-    //   AuthService.registerUser(body).then(res => {
-    //     if (res?.data?.isSuccess) {
-    //       ToastAndroid.show(res?.data?.message, ToastAndroid.LONG);
-    //       props.navigation.navigate(Routes.LOGIN_FORM_SCREEN1);
-    //     } else {
-    //       // props.navigation.navigate(Routes.LOGIN_FORM_SCREEN1);
-
-    //       ToastAndroid.show(res?.data?.message, ToastAndroid.LONG);
-    //     }
-    //   });
-    // } catch (error) {
-    //   // Cast 'error' to 'any' to handle the TypeScript error
-    //   console.log('Error in handleRegisterScreen:', error);
-    // }
-    //===============================================================================================
-    // try {
-    //   //dispatch(doRegister(body)); //call api
-
-    //   const registerResponse =
-    // } catch (error) {
-    //   console.log("ErrorLog", error)
-    // }
   };
 
   const handleScrollToInput = position => {
     // // Get the position of the TextInput
-    scrollViewRef.current?.scrollTo({ y: position, animated: true });
-
-    // errorTextRef.current.measureLayout(
-    //   scrollViewRef.current.getInnerViewNode,
-    //   (x, y) => {
-    //     // // Get the position of the error text
-    //     // errorTextRef.current.measureLayout(
-    //     //   scrollViewRef.current.getInnerViewNode(),
-
-    //     //   (errorX, errorY) => {
-    //     //     // Calculate the target scroll position
-    //     //     const targetPosition = Math.min(y, errorY);
-    //     //     // Scroll to the target position
-    //     //     scrollViewRef.current.scrollToPosition(0, targetPosition, true);
-    //     //   }
-    //     // );
-    //     console.log("00000000000000000000000000000000000000000000000", y)
-    //   }
-    // );
+    scrollViewRef.current?.scrollTo({y: position, animated: true});
   };
 
   return (
     <BaseView
       navigation={props.navigation}
       title={t('Sign up')}
-      headerWithBack
+      //headerWithBack --comment
       onBackPress={() => {
-        props.navigation.navigate(Routes.LOGIN_FORM_SCREEN1)
+        props.navigation.navigate(Routes.LOGIN_FORM_SCREEN1);
       }}
       applyBottomSafeArea
       childView={() => {
         return (
-          <View style={screenStyles.mainContainer}>
+          <View style={[screenStyles.mainContainer]}>
             <KeyboardAwareScrollView
               ref={scrollViewRef}
               keyboardShouldPersistTaps={'handled'} //handled
@@ -454,7 +314,7 @@ export const Variant1SignupScreen = props => {
                 <Text
                   style={[
                     screenStyles.inputLabel,
-                    { alignSelf: 'flex-start', marginTop: 16 },
+                    {alignSelf: 'flex-start', marginTop: 16},
                   ]}>
                   {t('Full Name')}
                 </Text>
@@ -475,7 +335,7 @@ export const Variant1SignupScreen = props => {
                     ref={errorTextRef}
                     style={[
                       screenStyles.accountErrorText,
-                      { alignSelf: 'flex-start' },
+                      {alignSelf: 'flex-start'},
                     ]}>
                     {errorUserName}
                   </Text>
@@ -484,13 +344,13 @@ export const Variant1SignupScreen = props => {
                 <Text
                   style={[
                     screenStyles.inputLabel,
-                    { alignSelf: 'flex-start', marginTop: 8 },
+                    {alignSelf: 'flex-start', marginTop: 8},
                   ]}>
                   {t('Mobile Number')}
                 </Text>
 
-                <View style={{ flexDirection: 'row' }}>
-                  <View style={{ flex: 0.3 }}>
+                <View style={{flexDirection: 'row'}}>
+                  <View style={{flex: 0.3}}>
                     <TouchableOpacity
                       onPress={() => {
                         setVisible(true);
@@ -510,16 +370,17 @@ export const Variant1SignupScreen = props => {
                         {'+' + selectedCountry.callingCode}
                       </Text>
 
-                      <SvgIcon
-                        type={IconNames.ChevronDown}
-                        width={15}
-                        height={15}
-                        color={colors.inputColor}
-                      />
+                      {/* comment */}
+                      {/* <SvgIcon
+                      type={IconNames.ChevronDown}
+                      width={15}
+                      height={15}
+                      color={colors.inputColor}
+                    /> */}
                     </TouchableOpacity>
                   </View>
 
-                  <View style={{ flex: 1 }}>
+                  <View style={{flex: 1}}>
                     <AppInput
                       {...globalStyles.secondaryInputStyle}
                       textInputRef={r => (inputRef = r)}
@@ -543,7 +404,7 @@ export const Variant1SignupScreen = props => {
                   <Text
                     style={[
                       screenStyles.accountErrorText,
-                      { alignSelf: 'flex-start' },
+                      {alignSelf: 'flex-start'},
                     ]}>
                     {errorPhone}
                   </Text>
@@ -551,7 +412,7 @@ export const Variant1SignupScreen = props => {
                 <Text
                   style={[
                     screenStyles.inputLabel,
-                    { alignSelf: 'flex-start', marginTop: 8 },
+                    {alignSelf: 'flex-start', marginTop: 8},
                   ]}>
                   {t('Email Address')}
                 </Text>
@@ -571,7 +432,7 @@ export const Variant1SignupScreen = props => {
                   <Text
                     style={[
                       screenStyles.accountErrorText,
-                      { alignSelf: 'flex-start' },
+                      {alignSelf: 'flex-start'},
                     ]}>
                     {errorEmail}
                   </Text>
@@ -580,7 +441,7 @@ export const Variant1SignupScreen = props => {
                 <Text
                   style={[
                     screenStyles.inputLabel,
-                    { alignSelf: 'flex-start', marginTop: 8 },
+                    {alignSelf: 'flex-start', marginTop: 8},
                   ]}>
                   {t('Password')}
                 </Text>
@@ -605,7 +466,7 @@ export const Variant1SignupScreen = props => {
                   <Text
                     style={[
                       screenStyles.accountErrorText,
-                      { alignSelf: 'flex-start' },
+                      {alignSelf: 'flex-start'},
                     ]}>
                     {errorPassword}
                   </Text>
@@ -614,7 +475,7 @@ export const Variant1SignupScreen = props => {
                 <Text
                   style={[
                     screenStyles.inputLabel,
-                    { alignSelf: 'flex-start', marginTop: 8 },
+                    {alignSelf: 'flex-start', marginTop: 8},
                   ]}>
                   {t('Confirm Password')}
                 </Text>
@@ -639,7 +500,7 @@ export const Variant1SignupScreen = props => {
                   <Text
                     style={[
                       screenStyles.accountErrorText,
-                      { alignSelf: 'flex-start' },
+                      {alignSelf: 'flex-start'},
                     ]}>
                     {errorCnfPassword}
                   </Text>
@@ -647,7 +508,7 @@ export const Variant1SignupScreen = props => {
 
                 {/* add address */}
 
-                <View style={{ width: '100%', marginTop: 6 }}>
+                <View style={{width: '100%', marginTop: 6}}>
                   <View
                     style={{
                       width: '100%',
@@ -694,7 +555,7 @@ export const Variant1SignupScreen = props => {
                   <Text
                     style={[
                       screenStyles.accountErrorText,
-                      { alignSelf: 'flex-start', marginTop: 6 },
+                      {alignSelf: 'flex-start', marginTop: 6},
                     ]}>
                     {errorAddressSelected}
                   </Text>
@@ -733,3 +594,5 @@ export const Variant1SignupScreen = props => {
     />
   );
 };
+
+export default Variant1SignupScreen;

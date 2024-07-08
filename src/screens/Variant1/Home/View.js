@@ -26,7 +26,6 @@ import {FavouritesBottomSheet} from '../../../components/Application/FavouritesB
 import {useTheme} from '@react-navigation/native';
 import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
 import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
-import {SvgIcon} from '../../../components/Application/SvgIcon/View';
 import IconNames from '../../../../branding/carter/assets/IconNames';
 import {FocusAwareStatusBar} from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
 import {Variant1Header} from '../Header/View';
@@ -60,19 +59,6 @@ import {useTranslation} from 'react-i18next';
 import {GlobalSearchButton} from '../../../components/Application/GlobalSearchButton/View';
 import {showToast} from '../../../utils/ToastMessage';
 import {BottomCartItem} from '../../../components/Application/BottomCartItem/View';
-
-//Constants
-// const slider_data = [
-//   {
-//     img: require('./Assets/Images/c_slider_img_1.png'),
-//   },
-//   {
-//     img: require('./Assets/Images/c_slider_img_2.png'),
-//   },
-//   {
-//     img: require('./Assets/Images/c_slider_img_3.png'),
-//   },
-// ];
 
 export const Variant1Home = props => {
   const {t, i18n} = useTranslation();
@@ -643,12 +629,12 @@ export const Variant1Home = props => {
                         {t('Categories')}
                       </Text>
 
-                      <SvgIcon
+                      {/* <SvgIcon  --comment
                         type={IconNames.ArrowRight}
                         width={20}
                         height={20}
                         color={colors.subHeadingColor}
-                      />
+                      /> */}
                     </View>
                   </TouchableOpacity>
 
@@ -726,12 +712,12 @@ export const Variant1Home = props => {
                           ? t('Near by Restaurant')
                           : t('Fresh Good Shops')}
                       </Text>
-                      <SvgIcon
+                      {/* <SvgIcon  //comment
                         type={IconNames.ArrowRight}
                         width={20}
                         height={20}
                         color={colors.subHeadingColor}
-                      />
+                      /> */}
                     </View>
                   </TouchableOpacity>
 

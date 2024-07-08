@@ -41,6 +41,18 @@ import Routes from './src/navigation/Routes';
 import {SplashScreen} from './src/screens/splash/View';
 import Variant1Intro from './src/screens/Variant1/Intro/View';
 import Variant1LoginFormScreen from './src/screens/Variant1/LoginForm/View';
+import {Variant1ForgotPassword} from './src/screens/Variant1/ForgotPassword/View';
+import Variant1SignupScreen from './src/screens/Variant1/Signup/View';
+import PlacesAutoCompleteForReg from './src/screens/Variant1/AddressAutoCompleteForRegistration/PlacesAutoCompleteForReg';
+import AddAddressFromMapForReg from './src/screens/Variant1/AddAddressForRegistrationFlow/AddAddressFromMapForReg';
+import AddAddressFromMap from './src/screens/Variant1/AddAddress/AddAddressFromMap';
+import AddAddressDetailsForReg from './src/screens/Variant1/AddAddressForRegistrationFlow/AddAddressDetailsForReg';
+import {Variant1Dashboard} from './src/screens/Variant1/Dashboard/View';
+import {Variant1Home} from './src/screens/Variant1/Home/View';
+import {Courier} from './src/screens/Variant1/Courier/View';
+import {Ride} from './src/screens/Variant1/Courier copy/View';
+import {Variant1Profile} from './src/screens/Variant1/Profile/View';
+import Variant3BottomTabBar from './src/components/Application/Variant3BottomTabBar/View';
 
 const lightColors = AppConfig.lightColors.default;
 const darkColors = AppConfig.darkColors.default;
@@ -89,7 +101,7 @@ function App() {
   );
 }
 
-const bottomTabsVariant = () => {
+function BottomTabsVariant() {
   return (
     <Tab.Navigator tabBar={props => <Variant3BottomTabBar {...props} />}>
       <Tab.Screen
@@ -106,11 +118,6 @@ const bottomTabsVariant = () => {
         component={Variant1Home}
         initialParams={{categoryTypeId: '2'}}
       />
-      {/* <Tab.Screen
-        name={Routes.COURIER_DELIVERY_DETAILS}
-        component={DeliveryDetails}
-        initialParams={{pickupAddress: ''}}
-      /> */}
 
       <Tab.Screen
         name={Routes.FRESH_GOODS}
@@ -126,21 +133,12 @@ const bottomTabsVariant = () => {
           pickupAddress: undefined,
         }}
       />
-      {/* <Tab.Screen name={Routes.COURIER} component={Courier} initialParams={{
-        pickupTitle: "",
-        pickupAddress: "",
-        pickupLat: "",
-        pickupLng: "",
-        idp: "",
-        subDistrictTitle: "",
-        subDistrictIdPickUp: "",
-      }} /> */}
 
       <Tab.Screen name={Routes.RIDE} component={Ride} />
       <Tab.Screen name={Routes.PROFILE} component={Variant1Profile} />
     </Tab.Navigator>
   );
-};
+}
 
 const Header = () => {
   const navigation = useNavigation();
@@ -194,6 +192,34 @@ export function RootStack() {
         <Stack.Screen
           name={Routes.LOGIN_FORM_SCREEN1}
           component={Variant1LoginFormScreen}
+        />
+        <Stack.Screen
+          name={Routes.FORGOT_PASSWORD_FORM_SCREEN1}
+          component={Variant1ForgotPassword}
+        />
+        <Stack.Screen
+          name={Routes.SIGNUP_FORM_SCREEN1}
+          component={Variant1SignupScreen}
+        />
+        <Stack.Screen
+          name={Routes.PLACES_AUTO_COMPLETE_FOR_REG}
+          component={PlacesAutoCompleteForReg}
+        />
+        <Stack.Screen
+          name={Routes.ADD_ADDRESS_FROM_MAP_FOR_REG}
+          component={AddAddressFromMapForReg}
+        />
+        <Stack.Screen
+          name={Routes.ADD_ADDRESS_FROM_MAP}
+          component={AddAddressFromMap}
+        />
+        <Stack.Screen
+          name={Routes.ADD_ADDRESS_DETAILS_FOR_REG}
+          component={AddAddressDetailsForReg}
+        />
+        <Stack.Screen
+          name={Routes.HOME_VARIANT1}
+          component={BottomTabsVariant}
         />
       </Stack.Navigator>
     </View>

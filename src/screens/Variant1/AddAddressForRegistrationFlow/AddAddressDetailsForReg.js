@@ -7,48 +7,48 @@ import {
   FlatList,
   Image,
 } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import BaseView from '../../BaseView';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-import { SvgIcon } from '../../../components/Application/SvgIcon/View';
-import { useTheme } from '@react-navigation/native';
-import { Button, CheckBox } from 'react-native-elements';
+//import {SvgIcon} from '../../../components/Application/SvgIcon/View';
+import {useTheme} from '@react-navigation/native';
+import {Button, CheckBox} from 'react-native-elements';
 import AppConfig from '../../../../branding/App_config';
-import { useColorScheme } from 'react-native';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
+import {useColorScheme} from 'react-native';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
 import AppButton from '../../../components/Application/AppButton/View';
 import AppInput from '../../../components/Application/AppInput/View';
 import axios from 'axios';
-import { Picker } from '@react-native-picker/picker';
-import { Styles } from './Style';
+import {Picker} from '@react-native-picker/picker';
+import {Styles} from './Style';
 
-import { ToastAndroid } from 'react-native';
+import {ToastAndroid} from 'react-native';
 import {
   setDefaultAddress,
   setLat,
   setLatLng,
   setLng,
 } from '../../../redux/features/Address/DefaultAddressSlice';
-import { setDefaultAddressTitle } from '../../../redux/features/Address/DefaultAddressSlice';
+import {setDefaultAddressTitle} from '../../../redux/features/Address/DefaultAddressSlice';
 
 const fonts = AppConfig.fonts.default;
 const Typography = AppConfig.typography.default;
 
 import Geocoder from 'react-native-geocoding';
-import { TextInput } from '../../../components/Global/TextInput/View';
-import { ScrollView } from 'react-native-gesture-handler';
+import {TextInput} from '../../../components/Global/TextInput/View';
+import {ScrollView} from 'react-native-gesture-handler';
 import Routes from '../../../navigation/Routes';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Globals from '../../../utils/Globals';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthService } from '../../../apis/services';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
-import { useTranslation } from 'react-i18next';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import {AuthService} from '../../../apis/services';
+import {heightPercentageToDP} from 'react-native-responsive-screen';
+import {useTranslation} from 'react-i18next';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 const baseUrl = Globals.baseUrl;
 
-export const AddAddressDetailsForReg = props => {
+const AddAddressDetailsForReg = props => {
   const saveAddressapiUrl = `${baseUrl}/Address`;
   const deliveryIn = useSelector(state => state.addressReducer.deliveryId);
 
@@ -57,7 +57,7 @@ export const AddAddressDetailsForReg = props => {
   const editAddressApiUrl = `${baseUrl}/Address/${addressId}`;
 
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, colors);
@@ -81,7 +81,7 @@ export const AddAddressDetailsForReg = props => {
   );
   const [district, setDistrict] = useState('');
 
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
 
   const [postalCode, setPostalCode] = useState(
     props.route.params.postalCode || '',
@@ -104,19 +104,18 @@ export const AddAddressDetailsForReg = props => {
   let inputRef = useRef();
   const onSearch = search => {
     if (search !== '') {
-
       // setProvince(tempData);
 
       // const filteredList = province.filter(item =>
       //   item.locationName.toLowerCase().includes(search.toLowerCase()),
       // );
 
-      const filteredList = province.filter(item =>
-        item.districtName.toLowerCase().includes(search.toLowerCase()) ||
-        item.subDistrictName.toLowerCase().includes(search.toLowerCase())
+      const filteredList = province.filter(
+        item =>
+          item.districtName.toLowerCase().includes(search.toLowerCase()) ||
+          item.subDistrictName.toLowerCase().includes(search.toLowerCase()),
       );
       setFilteredStoreList(filteredList);
-
     } else {
       setProvince(province);
     }
@@ -129,10 +128,11 @@ export const AddAddressDetailsForReg = props => {
           // const foundLocation = response.data.payload.find(
           //   item => item.locationName.toLowerCase() == subDistrict.toLowerCase());
 
-          console.log("Api--subdist------".response?.data?.payload)
-          const foundLocation = response.data.payload.find(item =>
-            item.districtName.toLowerCase() === subDistrict.toLowerCase() ||
-            item.subDistrictName.toLowerCase() === subDistrict.toLowerCase()
+          console.log('Api--subdist------'.response?.data?.payload);
+          const foundLocation = response.data.payload.find(
+            item =>
+              item.districtName.toLowerCase() === subDistrict.toLowerCase() ||
+              item.subDistrictName.toLowerCase() === subDistrict.toLowerCase(),
           );
 
           if (foundLocation) {
@@ -145,8 +145,7 @@ export const AddAddressDetailsForReg = props => {
           setProvince(response.data.payload);
           setFilteredStoreList(response.data.payload);
         } else {
-          ToastAndroid.show(
-            response?.data.message, ToastAndroid.LONG,);
+          ToastAndroid.show(response?.data.message, ToastAndroid.LONG);
         }
       } catch (error) {
         console.log('Error in handleRegister:', error);
@@ -330,30 +329,30 @@ export const AddAddressDetailsForReg = props => {
   };
 
   return (
-    <View style={{ backgroundColor: 'white', flex: 1 }}>
+    <View style={{backgroundColor: 'white', flex: 1}}>
       <BaseView
         navigation={props.navigation}
         title={t('Add Address Details')}
-        headerWithBack
+        //headerWithBack  --comment
         applyBottomSafeArea
-        childContainerStyle={{ flex: 1 }}
+        childContainerStyle={{flex: 1}}
         childView={() => {
           return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
               <KeyboardAwareScrollView
                 fadingEdgeLength={200}
                 keyboardShouldPersistTaps={'never'}
                 showsVerticalScrollIndicator={false}
-                style={{ flex: 1 }}>
-                <View style={{ flex: 1, flexDirection: 'column' }}>
-                  <View style={{ flex: 1, margin: 20 }}>
-                    <View style={{ flexDirection: 'row' }}>
-                      <SvgIcon
+                style={{flex: 1}}>
+                <View style={{flex: 1, flexDirection: 'column'}}>
+                  <View style={{flex: 1, margin: 20}}>
+                    <View style={{flexDirection: 'row'}}>
+                      {/* <SvgIcon  --comment
                         type={IconNames.MapMarkerAlt}
                         width={22}
                         height={22}
                         color={colors.primaryGreenColor}
-                      />
+                      /> */}
 
                       <Text
                         style={{
@@ -380,7 +379,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 26 },
+                        {alignSelf: 'flex-start', marginTop: 26},
                       ]}>
                       {t('Building/House Number')}
                     </Text>
@@ -401,7 +400,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please enter building/house number')}
                       </Text>
@@ -410,7 +409,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 8 },
+                        {alignSelf: 'flex-start', marginTop: 8},
                       ]}>
                       {t('Building Name')}
                     </Text>
@@ -431,7 +430,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please enter building name')}
                       </Text>
@@ -440,7 +439,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 8 },
+                        {alignSelf: 'flex-start', marginTop: 8},
                       ]}>
                       {t('Landmark')}
                     </Text>
@@ -461,7 +460,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please enter landmark')}
                       </Text>
@@ -470,7 +469,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 8 },
+                        {alignSelf: 'flex-start', marginTop: 8},
                       ]}>
                       {t('Road')}
                     </Text>
@@ -491,7 +490,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please enter road')}
                       </Text>
@@ -519,7 +518,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 8 },
+                        {alignSelf: 'flex-start', marginTop: 8},
                       ]}>
                       {t('Province')}
                     </Text>
@@ -540,7 +539,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please enter province')}
                       </Text>
@@ -579,7 +578,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 8 },
+                        {alignSelf: 'flex-start', marginTop: 8},
                       ]}>
                       {t('District')}
                     </Text>
@@ -620,12 +619,12 @@ export const AddAddressDetailsForReg = props => {
                           {clicked ? (
                             <Image
                               source={require('../../../../branding/carter/assets/images/upload.png')}
-                              style={{ width: 14, height: 14 }}
+                              style={{width: 14, height: 14}}
                             />
                           ) : (
                             <Image
                               source={require('../../../../branding/carter/assets/images/dropdown.png')}
-                              style={{ width: 14, height: 14 }}
+                              style={{width: 14, height: 14}}
                             />
                           )}
                         </TouchableOpacity>
@@ -653,7 +652,7 @@ export const AddAddressDetailsForReg = props => {
                             <FlatList
                               data={filteredStoreList}
                               scrollEnabled={true}
-                              renderItem={({ item, index }) => {
+                              renderItem={({item, index}) => {
                                 return (
                                   <TouchableOpacity
                                     style={{
@@ -671,16 +670,22 @@ export const AddAddressDetailsForReg = props => {
                                         setIsSubDistrict(false);
                                         setSubDistrict(item.subDistrictName);
                                         setLocationID(item.locationId);
-                                        setDistrict(item.districtName)
+                                        setDistrict(item.districtName);
                                       }
 
-                                      setSelectedCountry(item.districtName + ", " + item.subDistrictName);
+                                      setSelectedCountry(
+                                        item.districtName +
+                                          ', ' +
+                                          item.subDistrictName,
+                                      );
                                       setClicked(!clicked);
                                       onSearch('');
                                       setSearch('');
                                     }}>
-                                    <Text style={{ fontWeight: '600' }}>
-                                      {item.districtName + ", " + item.subDistrictName}
+                                    <Text style={{fontWeight: '600'}}>
+                                      {item.districtName +
+                                        ', ' +
+                                        item.subDistrictName}
                                     </Text>
                                   </TouchableOpacity>
                                 );
@@ -695,7 +700,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please select district')}
                       </Text>
@@ -716,7 +721,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 8 },
+                        {alignSelf: 'flex-start', marginTop: 8},
                       ]}>
                       {t('Postal Code')}
                     </Text>
@@ -737,7 +742,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please enter postal code')}
                       </Text>
@@ -746,7 +751,7 @@ export const AddAddressDetailsForReg = props => {
                     <Text
                       style={[
                         screenStyles.inputLabel,
-                        { alignSelf: 'flex-start', marginTop: 8 },
+                        {alignSelf: 'flex-start', marginTop: 8},
                       ]}>
                       {t('Save Address As')}
                     </Text>
@@ -768,7 +773,7 @@ export const AddAddressDetailsForReg = props => {
                       <Text
                         style={[
                           screenStyles.accountText,
-                          { alignSelf: 'flex-start', color: 'red' },
+                          {alignSelf: 'flex-start', color: 'red'},
                         ]}>
                         {t('Please enter save as')}
                       </Text>
@@ -813,7 +818,7 @@ export const AddAddressDetailsForReg = props => {
                 </View>
               </KeyboardAwareScrollView>
 
-              <View style={{ marginTop: 10, marginHorizontal: 16 }}>
+              <View style={{marginTop: 10, marginHorizontal: 16}}>
                 <AppButton
                   title={t('Set Address')}
                   onPress={() => {
@@ -829,103 +834,4 @@ export const AddAddressDetailsForReg = props => {
   );
 };
 
-// const mapStyle = [
-//     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-//     {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-//     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-//     {
-//       featureType: 'administrative.locality',
-//       elementType: 'labels.text.fill',
-//       stylers: [{color: '#d59563'}],
-//     },
-//     {
-//       featureType: 'poi',
-//       elementType: 'labels.text.fill',
-//       stylers: [{color: '#d59563'}],
-//     },
-//     {
-//       featureType: 'poi.park',
-//       elementType: 'geometry',
-//       stylers: [{color: '#263c3f'}],
-//     },
-//     {
-//       featureType: 'poi.park',
-//       elementType: 'labels.text.fill',
-//       stylers: [{color: '#6b9a76'}],
-//     },
-//     {
-//       featureType: 'road',
-//       elementType: 'geometry',
-//       stylers: [{color: '#38414e'}],
-//     },
-//     {
-//       featureType: 'road',
-//       elementType: 'geometry.stroke',
-//       stylers: [{color: '#212a37'}],
-//     },
-//     {
-//       featureType: 'road',
-//       elementType: 'labels.text.fill',
-//       stylers: [{color: '#9ca5b3'}],
-//     },
-//     {
-//       featureType: 'road.highway',
-//       elementType: 'geometry',
-//       stylers: [{color: '#746855'}],
-//     },
-//     {
-//       featureType: 'road.highway',
-//       elementType: 'geometry.stroke',
-//       stylers: [{color: '#1f2835'}],
-//     },
-//     {
-//       featureType: 'road.highway',
-//       elementType: 'labels.text.fill',
-//       stylers: [{color: '#f3d19c'}],
-//     },
-//     {
-//       featureType: 'transit',
-//       elementType: 'geometry',
-//       stylers: [{color: '#2f3948'}],
-//     },
-//     {
-//       featureType: 'transit.station',
-//       elementType: 'labels.text.fill',
-//       stylers: [{color: '#d59563'}],
-//     },
-//     {
-//       featureType: 'water',
-//       elementType: 'geometry',
-//       stylers: [{color: '#17263c'}],
-//     },
-//     {
-//       featureType: 'water',
-//       elementType: 'labels.text.fill',
-//       stylers: [{color: '#515c6d'}],
-//     },
-//     {
-//       featureType: 'water',
-//       elementType: 'labels.text.stroke',
-//       stylers: [{color: '#17263c'}],
-//     },
-//   ];
-//   const styles = StyleSheet.create({
-//     container: {
-//         flex:1,
-//       position: 'absolute',
-//       top: 0,
-//       left: 0,
-//       right: 0,
-//       bottom: 0,
-//       alignItems: 'center',
-//       justifyContent: 'flex-end',
-//     },
-//     mapStyle: {
-//         flex:0.8,
-//       position: 'absolute',
-//       top: 0,
-//       left: 0,
-//       right: 0,
-//       bottom: 0,
-//     },
-//   });
+export default AddAddressDetailsForReg;

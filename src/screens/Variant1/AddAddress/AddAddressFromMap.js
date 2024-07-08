@@ -1,16 +1,16 @@
-import { View, Text, SafeAreaView, StyleSheet, ToastAndroid } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import {View, Text, SafeAreaView, StyleSheet, ToastAndroid} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import BaseView from '../../BaseView';
-import { useFocusEffect } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-import { SvgIcon } from '../../../components/Application/SvgIcon/View';
-import { useTheme } from '@react-navigation/native';
-import { Button } from 'react-native-elements';
-import { Styles } from './Style';
+import {SvgIcon} from '../../../components/Application/SvgIcon/View';
+import {useTheme} from '@react-navigation/native';
+import {Button} from 'react-native-elements';
+import {Styles} from './Style';
 import AppConfig from '../../../../branding/App_config';
-import { useColorScheme } from 'react-native';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
+import {useColorScheme} from 'react-native';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
 import AppButton from '../../../components/Application/AppButton/View';
 import Routes from '../../../navigation/Routes';
 
@@ -18,17 +18,17 @@ const fonts = AppConfig.fonts.default;
 const Typography = AppConfig.typography.default;
 
 // Import Map and Marker
-import MapView, { Marker } from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { t } from 'i18next';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {t} from 'i18next';
 import Globals from '../../../utils/Globals';
 
 Geocoder.init(Globals.googleApiKey);
 
-export const AddAddressFromMap = props => {
+const AddAddressFromMap = props => {
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, colors);
@@ -140,7 +140,7 @@ export const AddAddressFromMap = props => {
         result.results.length > 0
       ) {
         // Extract address components
-        const { address_components } = result.results[0];
+        const {address_components} = result.results[0];
         let road = '';
         let district = '';
         let state = '';
@@ -199,18 +199,18 @@ export const AddAddressFromMap = props => {
   };
 
   return (
-    <View style={{ backgroundColor: 'white', flex: 1 }}>
+    <View style={{backgroundColor: 'white', flex: 1}}>
       <BaseView
         navigation={props.navigation}
         title={t('Confirm Location')}
-        headerWithBack
+        //headerWithBack --comment
         applyBottomSafeArea
-        childContainerStyle={{ flex: 1 }}
+        childContainerStyle={{flex: 1}}
         childView={() => {
           return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
               <MapView
-                style={{ flex: 0.8 }}
+                style={{flex: 0.8}}
                 onRegionChange={region => {
                   setLatitude(region.latitude);
                   setLongitude(region.longitude);
@@ -227,7 +227,7 @@ export const AddAddressFromMap = props => {
                   latitudeDelta: 0.001,
                   longitudeDelta: 0.001,
                 }}
-              //customMapStyle={mapStyle}
+                //customMapStyle={mapStyle}
               >
                 <Marker
                   coordinate={{
@@ -255,7 +255,7 @@ export const AddAddressFromMap = props => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                   }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <SvgIcon
                       type={IconNames.MapMarkerAlt}
                       width={20}
@@ -322,7 +322,7 @@ export const AddAddressFromMap = props => {
                   {subAddress}
                 </Text>
 
-                <View style={{ marginTop: 10 }}>
+                <View style={{marginTop: 10}}>
                   <AppButton
                     title={t('Use this location')}
                     onPress={() => {
@@ -370,83 +370,83 @@ export const AddAddressFromMap = props => {
 };
 
 const mapStyle = [
-  { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
-  { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
-  { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
+  {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+  {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+  {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
   {
     featureType: 'administrative.locality',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#d59563' }],
+    stylers: [{color: '#d59563'}],
   },
   {
     featureType: 'poi',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#d59563' }],
+    stylers: [{color: '#d59563'}],
   },
   {
     featureType: 'poi.park',
     elementType: 'geometry',
-    stylers: [{ color: '#263c3f' }],
+    stylers: [{color: '#263c3f'}],
   },
   {
     featureType: 'poi.park',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#6b9a76' }],
+    stylers: [{color: '#6b9a76'}],
   },
   {
     featureType: 'road',
     elementType: 'geometry',
-    stylers: [{ color: '#38414e' }],
+    stylers: [{color: '#38414e'}],
   },
   {
     featureType: 'road',
     elementType: 'geometry.stroke',
-    stylers: [{ color: '#212a37' }],
+    stylers: [{color: '#212a37'}],
   },
   {
     featureType: 'road',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#9ca5b3' }],
+    stylers: [{color: '#9ca5b3'}],
   },
   {
     featureType: 'road.highway',
     elementType: 'geometry',
-    stylers: [{ color: '#746855' }],
+    stylers: [{color: '#746855'}],
   },
   {
     featureType: 'road.highway',
     elementType: 'geometry.stroke',
-    stylers: [{ color: '#1f2835' }],
+    stylers: [{color: '#1f2835'}],
   },
   {
     featureType: 'road.highway',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#f3d19c' }],
+    stylers: [{color: '#f3d19c'}],
   },
   {
     featureType: 'transit',
     elementType: 'geometry',
-    stylers: [{ color: '#2f3948' }],
+    stylers: [{color: '#2f3948'}],
   },
   {
     featureType: 'transit.station',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#d59563' }],
+    stylers: [{color: '#d59563'}],
   },
   {
     featureType: 'water',
     elementType: 'geometry',
-    stylers: [{ color: '#17263c' }],
+    stylers: [{color: '#17263c'}],
   },
   {
     featureType: 'water',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#515c6d' }],
+    stylers: [{color: '#515c6d'}],
   },
   {
     featureType: 'water',
     elementType: 'labels.text.stroke',
-    stylers: [{ color: '#17263c' }],
+    stylers: [{color: '#17263c'}],
   },
 ];
 const styles = StyleSheet.create({
@@ -469,3 +469,5 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
+
+export default AddAddressFromMap;

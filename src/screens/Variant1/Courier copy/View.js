@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   FlatList,
   Image,
@@ -10,30 +10,30 @@ import {
 } from 'react-native';
 //test push
 
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 
-import { FoodItem } from '../../../components/Application/FoodItem/View';
-import { CategoryItem } from '../../../components/Application/CategoryItem/View';
-import { SearchButton } from '../../../components/Application/SearchButton/View';
+import {FoodItem} from '../../../components/Application/FoodItem/View';
+import {CategoryItem} from '../../../components/Application/CategoryItem/View';
+import {SearchButton} from '../../../components/Application/SearchButton/View';
 
-import { Styles } from './Styles';
+import {Styles} from './Styles';
 import Routes from '../../../navigation/Routes';
 import Globals from '../../../utils/Globals';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { FavouritesBottomSheet } from '../../../components/Application/FavouritesBottomSheet/View';
-import { useTheme } from '@react-navigation/native';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
-import { SvgIcon } from '../../../components/Application/SvgIcon/View';
+import {FavouritesBottomSheet} from '../../../components/Application/FavouritesBottomSheet/View';
+import {useTheme} from '@react-navigation/native';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
+import {SvgIcon} from '../../../components/Application/SvgIcon/View';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-import { FocusAwareStatusBar } from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
-import { Variant1Header } from '../Header/View';
+import {FocusAwareStatusBar} from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
+import {Variant1Header} from '../Header/View';
 import axios from 'axios';
 import AppConfig from '../../../../branding/App_config';
-import { ProductService } from '../../../apis/services/product';
-import { BestSellingStoreItem } from '../../../components/Application/BestSellingStoreItem/View';
-import { NearByStore } from '../../../components/Application/NearByStoreItem/View';
-import { ShopService } from '../../../apis/services';
+import {ProductService} from '../../../apis/services/product';
+import {BestSellingStoreItem} from '../../../components/Application/BestSellingStoreItem/View';
+import {NearByStore} from '../../../components/Application/NearByStoreItem/View';
+import {ShopService} from '../../../apis/services';
 const Typography = AppConfig.typography.default;
 const Fonts = AppConfig.fonts.default;
 import {
@@ -41,35 +41,22 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
+import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
-import { useDispatch, useSelector } from 'react-redux';
-import { cartCount } from '../../../redux/features/AddToCart/ProductSlice';
-import { useTranslation } from 'react-i18next';
-import { TextInput } from '../../../components/Global/TextInput/View';
+import {useDispatch, useSelector} from 'react-redux';
+import {cartCount} from '../../../redux/features/AddToCart/ProductSlice';
+import {useTranslation} from 'react-i18next';
+import {TextInput} from '../../../components/Global/TextInput/View';
 import AppInput from '../../../components/Application/AppInput/View';
 
-//Constants
-const slider_data = [
-  {
-    img: require('../Home/Assets/Images/c_slider_img_1.png'),
-  },
-  {
-    img: require('../Home/Assets/Images/c_slider_img_2.png'),
-  },
-  {
-    img: require('../Home/Assets/Images/c_slider_img_3.png'),
-  },
-];
-
 export const Ride = props => {
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
   let inputRef = useRef();
   //Theme based styling and colors
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, scheme, colors);
@@ -97,13 +84,13 @@ export const Ride = props => {
   const latSlice = useSelector(state => state.addressReducer.lat);
   const lngSlice = useSelector(state => state.addressReducer.lng);
 
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   return (
     <View
       style={[
         screenStyles.mainWrapper,
-        { paddingTop: Globals.SAFE_AREA_INSET.top },
+        {paddingTop: Globals.SAFE_AREA_INSET.top},
       ]}>
       <LinearGradient
         colors={[colors.activeColor, '#209650', colors.primaryGreenColor]}
@@ -133,8 +120,8 @@ export const Ride = props => {
         <View style={screenStyles.promotionSliderContainer}>
           <Carousel
             ref={_carousel}
-            data={slider_data}
-            renderItem={({ item }) => {
+            //  data={slider_data}
+            renderItem={({item}) => {
               return (
                 <TouchableOpacity
                 //   onPress={() => {
@@ -239,7 +226,7 @@ export const Ride = props => {
             <Text
               style={[
                 screenStyles.sectionHeadingText,
-                { marginStart: 10, color: 'white' },
+                {marginStart: 10, color: 'white'},
               ]}>
               Set pickup & drop off location
             </Text>

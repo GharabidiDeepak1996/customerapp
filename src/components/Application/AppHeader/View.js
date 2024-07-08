@@ -13,7 +13,7 @@ import AppConfig from '../../../../branding/App_config';
 import {useTheme} from '@react-navigation/native';
 import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
 import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
-import {SvgIcon} from '../SvgIcon/View';
+//import {SvgIcon} from '../SvgIcon/View';
 import IconNames from '../../../../branding/carter/assets/IconNames';
 import {useSelector} from 'react-redux';
 import Routes from '../../../navigation/Routes';
@@ -114,7 +114,7 @@ const AppHeader = props => {
               // backPressFun(navigation)
             }}>
             <View style={headerIconContainerStyle}>
-              <SvgIcon
+              {/* <SvgIcon
                 style={{}}
                 color={
                   overrideTheme
@@ -128,7 +128,7 @@ const AppHeader = props => {
                 width={25}
                 height={25}
                 type={IconNames.ArrowLeft}
-              />
+              /> */}
             </View>
           </TouchableWithoutFeedback>
         )
@@ -160,7 +160,7 @@ const AppHeader = props => {
               onRightIconPress();
             }}>
             <View style={headerIconContainerStyle}>
-              <SvgIcon
+              {/* <SvgIcon
                 style={{}}
                 color={
                   overrideTheme
@@ -174,7 +174,7 @@ const AppHeader = props => {
                 width={22}
                 height={22}
                 type={rightIcon}
-              />
+              /> */}
               {(title == 'Restaurant' ||
                 title == 'Groceries' ||
                 title == 'Fish' ||
@@ -215,21 +215,21 @@ const AppHeader = props => {
   );
 };
 
-AppHeader.propTypes = {
-  navigation: PropTypes.any,
-  containerStyle: ViewPropTypes.style,
+// AppHeader.propTypes = {
+//   navigation: PropTypes.any,
+//   containerStyle: ViewPropTypes.style,
 
-  title: PropTypes.string,
-  headerWithBack: PropTypes.bool,
-  transparentHeader: PropTypes.bool,
-  darkIcons: PropTypes.bool,
-  headerWithBackground: PropTypes.bool,
-  isTranslucent: PropTypes.bool,
+//   title: PropTypes.string,
+//   headerWithBack: PropTypes.bool,
+//   transparentHeader: PropTypes.bool,
+//   darkIcons: PropTypes.bool,
+//   headerWithBackground: PropTypes.bool,
+//   isTranslucent: PropTypes.bool,
 
-  rightIcon: PropTypes.string,
-  onRightIconPress: PropTypes.func,
-  onBackPress: PropTypes.func,
-  topInset: PropTypes.number,
-};
+//   rightIcon: PropTypes.string,
+//   onRightIconPress: PropTypes.func,
+//   onBackPress: PropTypes.func,
+//   topInset: PropTypes.number,
+// };
 
 export default AppHeader;

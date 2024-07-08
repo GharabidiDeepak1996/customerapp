@@ -94,7 +94,7 @@ const Variant1LoginFormScreen = props => {
       let password = await AsyncStorage.getItem('passwordLocal');
       let firebaseToke = await AsyncStorage.getItem('firebaseToken');
 
-      console.log('------------------------->>>>>', firebaseToke);
+      console.log('Login Form---->', firebaseToke);
       setFirebaseToken(firebaseToke);
       if (rememberMee) {
         setMobile(mobileNu?.replace(/['"]+/g, ''));
@@ -197,62 +197,45 @@ const Variant1LoginFormScreen = props => {
 
         let response = await AuthService.LoginUser(loginRequest);
 
-        if (response !== undefined) {
-          if (response?.data?.isSuccess) {
-            AsyncStorage.setItem('isAlreadyLogin', JSON.stringify(true));
-            setLoading(false);
+        if (response?.data?.isSuccess) {
+          AsyncStorage.setItem('isAlreadyLogin', JSON.stringify(true));
+          setLoading(false);
 
-            if (rememberMe) {
-              AsyncStorage.setItem('mobilenoLocal', JSON.stringify(mobile));
-              AsyncStorage.setItem('passwordLocal', JSON.stringify(password));
+          if (rememberMe) {
+            AsyncStorage.setItem('mobilenoLocal', JSON.stringify(mobile));
+            AsyncStorage.setItem('passwordLocal', JSON.stringify(password));
 
-              AsyncStorage.setItem('isRemember', JSON.stringify(rememberMe));
+            AsyncStorage.setItem('isRemember', JSON.stringify(rememberMe));
 
-              //AsyncStorage.setItem("rememberMe", { checkbox: true, mobile: mobile, password: hashedPassword })
-            } else {
-              AsyncStorage.removeItem('mobilenoLocal');
-              AsyncStorage.removeItem('passwordLocal');
-              AsyncStorage.setItem('isRemember', JSON.stringify(rememberMe));
+            //AsyncStorage.setItem("rememberMe", { checkbox: true, mobile: mobile, password: hashedPassword })
+          } else {
+            AsyncStorage.removeItem('mobilenoLocal');
+            AsyncStorage.removeItem('passwordLocal');
+            AsyncStorage.setItem('isRemember', JSON.stringify(rememberMe));
 
-              //AsyncStorage.setItem("rememberMe")
-            }
+            //AsyncStorage.setItem("rememberMe")
+          }
 
-            if (response?.data?.payload?.user?.userId !== undefined) {
-              AsyncStorage.setItem(
-                'userId',
-                JSON.stringify(response?.data?.payload?.user?.userId),
-              );
-              AsyncStorage.setItem(
-                'accountId',
-                JSON.stringify(response?.data?.payload?.user?.accountId),
-              );
-              AsyncStorage.setItem(
-                'displayName',
-                response?.data?.payload?.user?.displayName,
-              );
-              AsyncStorage.setItem(
-                'email',
-                response?.data?.payload?.user?.email,
-              );
-              AsyncStorage.setItem(
-                'phoneNo',
-                response?.data?.payload?.user?.countryCode +
-                  '' +
-                  response?.data?.payload?.user?.phoneNo,
-              );
-              //dispatch(setLat(latLocal));
-              //dispatch(setLng(lngLocal));
-
-              props.navigation.dispatch(
-                CommonActions.reset({
-                  index: 1,
-                  routes: [{name: Routes.HOME_VARIANT1}],
-                }),
-              );
-            } else {
-              setLoading(false);
-              ToastAndroid.show('Please try again', ToastAndroid.SHORT);
-            }
+          if (response?.data?.payload?.user?.userId !== undefined) {
+            AsyncStorage.setItem(
+              'userId',
+              JSON.stringify(response?.data?.payload?.user?.userId),
+            );
+            AsyncStorage.setItem(
+              'accountId',
+              JSON.stringify(response?.data?.payload?.user?.accountId),
+            );
+            AsyncStorage.setItem(
+              'displayName',
+              response?.data?.payload?.user?.displayName,
+            );
+            AsyncStorage.setItem('email', response?.data?.payload?.user?.email);
+            AsyncStorage.setItem(
+              'phoneNo',
+              response?.data?.payload?.user?.countryCode +
+                '' +
+                response?.data?.payload?.user?.phoneNo,
+            );
 
             props.navigation.dispatch(
               CommonActions.reset({
@@ -261,15 +244,22 @@ const Variant1LoginFormScreen = props => {
               }),
             );
           } else {
-            AsyncStorage.removeItem('mobilenoLocal');
-            AsyncStorage.removeItem('passwordLocal');
-            AsyncStorage.setItem('isRemember', JSON.stringify(rememberMe));
             setLoading(false);
-            //AsyncStorage.setItem("rememberMe")
-            ToastAndroid.show(response?.data?.message, ToastAndroid.SHORT);
+            ToastAndroid.show('Please try again', ToastAndroid.SHORT);
           }
+          props.navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [{name: Routes.HOME_VARIANT1}],
+            }),
+          );
         } else {
+          AsyncStorage.removeItem('mobilenoLocal');
+          AsyncStorage.removeItem('passwordLocal');
+          AsyncStorage.setItem('isRemember', JSON.stringify(rememberMe));
           setLoading(false);
+          //AsyncStorage.setItem("rememberMe")
+          ToastAndroid.show(response?.data?.message, ToastAndroid.SHORT);
         }
       } catch (error) {
         setLoading(false);

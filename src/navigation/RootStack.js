@@ -7,7 +7,6 @@ import {SplashScreen} from '../screens/splash/View';
 
 import {Variant1Intro} from '../screens/Variant1/Intro/View';
 import {Variant1LoginScreen} from '../screens/Variant1/Login/View';
-import {Variant1LoginFormScreen} from '../screens/Variant1/LoginForm/View';
 import {Variant1SignupScreen} from '../screens/Variant1/Signup/View';
 import {Variant1ForgotPassword} from '../screens/Variant1/ForgotPassword/View';
 
@@ -92,6 +91,7 @@ import {TopupWallet} from '../screens/Wallet/TopupWallet';
 import {SelectBankForWalletTopup} from '../screens/Wallet/SelectBankForWalletTopup';
 import {WalletTransactions} from '../screens/WalletTransactions/View';
 import {SingleMapTrackOrder} from '../screens/SingleOrderMapTracking/View';
+import Variant1LoginFormScreen from '../screens/Variant1/LoginForm/View';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

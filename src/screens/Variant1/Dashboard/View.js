@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, {useRef, useState, useEffect, useCallback} from 'react';
 import {
   FlatList,
   Image,
@@ -8,44 +8,23 @@ import {
   View,
   Alert,
   ToastAndroid,
-  ActivityIndicator,
   ScrollView,
-  RefreshControl,
 } from 'react-native';
 
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-
-import { FoodItem } from '../../../components/Application/FoodItem/View';
-import { CategoryItem } from '../../../components/Application/CategoryItem/View';
-import { SearchButton } from '../../../components/Application/SearchButton/View';
-
-import { Styles } from './Styles';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {Styles} from './Styles';
 import Routes from '../../../navigation/Routes';
 import Globals from '../../../utils/Globals';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import { FavouritesBottomSheet } from '../../../components/Application/FavouritesBottomSheet/View';
-import { useTheme } from '@react-navigation/native';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
-import { SvgIcon } from '../../../components/Application/SvgIcon/View';
-import IconNames from '../../../../branding/carter/assets/IconNames';
-import { FocusAwareStatusBar } from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
-import AppInput from '../../../components/Application/AppInput/View';
-import { Variant1Header } from '../Header/View';
+import {useTheme} from '@react-navigation/native';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
+
+import {Variant1Header} from '../Header/View';
 import axios from 'axios';
-import { DashBoardMenu } from './dashboardMenu';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { ProductService } from '../../../apis/services/product';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { BackHandler, DeviceEventEmitter } from 'react-native';
-import LocationServicesDialogBox from 'react-native-android-location-services-dialog-box';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-
-import { AddressListSheet } from './AddressList/AddressListSheet';
-import { CommomService } from '../../../apis/services/Common';
+import {useDispatch, useSelector} from 'react-redux';
+import {BackHandler, DeviceEventEmitter} from 'react-native';
+import {CommomService} from '../../../apis/services/Common';
 import AppConfig from '../../../../branding/App_config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   deliveryIn,
   setAutoRefreshTrackingInterval,
@@ -62,9 +41,9 @@ import {
   setPaymentInterval,
   setShowHeading,
 } from '../../../redux/features/Dashboard/dashboardSlice';
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
+import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   heightPercentageToDP,
@@ -75,14 +54,14 @@ import {
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
 const fonts = AppConfig.fonts.default;
-import { useTranslation } from 'react-i18next';
-import { GlobalSearchButton } from '../../../components/Application/GlobalSearchButton/View';
-import { LocalStorageGet, LocalStorageSet } from '../../../localStorage';
-import { useFocusEffect } from '@react-navigation/native';
-import { AuthService, ChatService } from '../../../apis/services';
+import {useTranslation} from 'react-i18next';
+import {GlobalSearchButton} from '../../../components/Application/GlobalSearchButton/View';
+import {LocalStorageGet, LocalStorageSet} from '../../../localStorage';
+import {useFocusEffect} from '@react-navigation/native';
+import {AuthService, ChatService} from '../../../apis/services';
 import PushController from '../../../utils/PushController';
-import { notificationStore } from '../../../redux/features/Notification/notificationSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {notificationStore} from '../../../redux/features/Notification/notificationSlice';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faCreditCard,
   faDroplet,
@@ -99,11 +78,11 @@ import {
   faDropletSlash,
   faEyeDropper,
 } from '@fortawesome/free-solid-svg-icons';
-import { watchPosition } from 'react-native-geolocation-service';
+import {watchPosition} from 'react-native-geolocation-service';
 
 export const Variant1Dashboard = React.memo(props => {
   //translation and navigation
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
   const navigation = useNavigation();
 
   //redux
@@ -130,7 +109,7 @@ export const Variant1Dashboard = React.memo(props => {
 
   //Theme based styling and colors
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, scheme, colors);
@@ -138,7 +117,7 @@ export const Variant1Dashboard = React.memo(props => {
   const [showStoreBottomSheetComponent, setStoreBottomSheetComponent] =
     useState(false);
 
-  const Item = ({ icons, onPress, name, imgURL }) => (
+  const Item = ({icons, onPress, name, imgURL}) => (
     <View>
       <TouchableOpacity
         // style={[screenStyles.item, { borderWidth: 0.5, }]}
@@ -209,7 +188,7 @@ export const Variant1Dashboard = React.memo(props => {
       if (!response?.data?.isSuccess) {
         ToastAndroid.show(
           response?.data.message ||
-          'An error occurred during get getChatService.',
+            'An error occurred during get getChatService.',
           ToastAndroid.LONG,
         );
         return;
@@ -369,9 +348,9 @@ export const Variant1Dashboard = React.memo(props => {
           ref={_carousel}
           //data={slider_data}
           data={bannersCarbonClick}
-          renderItem={({ item }) => {
+          renderItem={({item}) => {
             return (
-              <TouchableOpacity onPress={() => { }}>
+              <TouchableOpacity onPress={() => {}}>
                 <Image
                   source={{
                     uri: `${Globals.imgBaseURL}/${item.imageUrl}`,
@@ -398,7 +377,7 @@ export const Variant1Dashboard = React.memo(props => {
         Alert.alert('Exit', 'Are you sure you want to exit this app?', [
           {
             text: 'No',
-            onPress: () => { },
+            onPress: () => {},
             style: 'cancel',
           },
           {
@@ -431,9 +410,9 @@ export const Variant1Dashboard = React.memo(props => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+    <View style={{flex: 1, backgroundColor: '#ffffff'}}>
       <PushController navigation={props.navigation} />
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         {/* deliver in-------------------------------------------------------------- */}
 
         <LinearGradient
@@ -456,7 +435,7 @@ export const Variant1Dashboard = React.memo(props => {
 
           {/* Search Bar-------------------------------------------------------------------------------------------------------- */}
 
-          <View style={{ width: '100%' }}>
+          <View style={{width: '100%'}}>
             <GlobalSearchButton
               name={'Dishes, Restaurants, Groceries & More'}
               onPress={() => {
@@ -469,7 +448,6 @@ export const Variant1Dashboard = React.memo(props => {
               }}
             />
           </View>
-
         </LinearGradient>
 
         {/* horizontal */}
@@ -496,11 +474,11 @@ export const Variant1Dashboard = React.memo(props => {
               <View
                 style={[
                   screenStyles.newServicesBorder,
-                  { justifyContent: 'center', alignItems: 'center' },
+                  {justifyContent: 'center', alignItems: 'center'},
                 ]}>
                 <FontAwesomeIcon
                   icon={faPlug}
-                  style={{ color: '#444' }}
+                  style={{color: '#444'}}
                   size={24}
                 />
               </View>
@@ -520,11 +498,11 @@ export const Variant1Dashboard = React.memo(props => {
               <View
                 style={[
                   screenStyles.newServicesBorder,
-                  { justifyContent: 'center', alignItems: 'center' },
+                  {justifyContent: 'center', alignItems: 'center'},
                 ]}>
                 <FontAwesomeIcon
                   icon={faDroplet}
-                  style={{ color: '#444' }}
+                  style={{color: '#444'}}
                   size={24}
                 />
               </View>
@@ -544,11 +522,11 @@ export const Variant1Dashboard = React.memo(props => {
               <View
                 style={[
                   screenStyles.newServicesBorder,
-                  { justifyContent: 'center', alignItems: 'center' },
+                  {justifyContent: 'center', alignItems: 'center'},
                 ]}>
                 <FontAwesomeIcon
                   icon={faWifi}
-                  style={{ color: '#444' }}
+                  style={{color: '#444'}}
                   size={24}
                 />
               </View>
@@ -568,11 +546,11 @@ export const Variant1Dashboard = React.memo(props => {
               <View
                 style={[
                   screenStyles.newServicesBorder,
-                  { justifyContent: 'center', alignItems: 'center' },
+                  {justifyContent: 'center', alignItems: 'center'},
                 ]}>
                 <FontAwesomeIcon
                   icon={faSignal5}
-                  style={{ color: '#444' }}
+                  style={{color: '#444'}}
                   size={24}
                 />
               </View>
@@ -592,11 +570,11 @@ export const Variant1Dashboard = React.memo(props => {
               <View
                 style={[
                   screenStyles.newServicesBorder,
-                  { justifyContent: 'center', alignItems: 'center' },
+                  {justifyContent: 'center', alignItems: 'center'},
                 ]}>
                 <FontAwesomeIcon
                   icon={faCreditCard}
-                  style={{ color: '#444' }}
+                  style={{color: '#444'}}
                   size={24}
                 />
               </View>
@@ -605,18 +583,18 @@ export const Variant1Dashboard = React.memo(props => {
           </TouchableOpacity>
         </View>
 
-        <View style={[screenStyles.mainWrapper, { marginTop: 0 }]}>
+        <View style={[screenStyles.mainWrapper, {marginTop: 0}]}>
           {/* category types */}
           {isLoading ? (
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={Globals.foodItems}
               numColumns={2}
-              style={{ marginTop: 0, marginBottom: 200 }}
+              style={{marginTop: 0, marginBottom: 200}}
               keyExtractor={(item, index) => {
                 return item.id;
               }}
-              renderItem={({ item, index }) => {
+              renderItem={({item, index}) => {
                 return (
                   <View>
                     <ShimmerPlaceholder

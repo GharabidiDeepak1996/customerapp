@@ -1,24 +1,19 @@
-import { View, Text, SafeAreaView } from 'react-native';
-import React, { useRef, useState } from 'react';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import {View, Text, SafeAreaView} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import BaseView from '../../BaseView';
 import IconNames from '../../../../branding/carter/assets/IconNames';
 import Routes from '../../../navigation/Routes';
-import { t } from 'i18next';
+import {t} from 'i18next';
 import Globals from '../../../utils/Globals';
 
-export const PlacesAutoCompleteForReg = props => {
+const PlacesAutoCompleteForReg = props => {
   const [road, setRoad] = useState('');
   const [district, setDistrict] = useState('');
   const [state, setState] = useState('');
   const [postal_code, setPostal_code] = useState('');
   const [town, setTown] = useState('');
   const [ward, setWard] = useState('');
-
-  // const workPlace = {
-  //   description: 'Work',
-  //   geometry: { location: { lat: 48.8496818, lng: 2.2940881 } },
-  // };
 
   const handlePlaceSelected = async (
     place_id,
@@ -51,7 +46,7 @@ export const PlacesAutoCompleteForReg = props => {
         result.results.length > 0
       ) {
         // Extract address components
-        const { address_components } = result.results[0];
+        const {address_components} = result.results[0];
         let road = '';
         let district = '';
         let state = '';
@@ -121,15 +116,15 @@ export const PlacesAutoCompleteForReg = props => {
   };
 
   return (
-    <View style={{ backgroundColor: 'black', flex: 1 }}>
+    <View style={{backgroundColor: 'black', flex: 1}}>
       <BaseView
         navigation={props.navigation}
         title={t('Search Location')}
-        headerWithBack
+        //headerWithBack --comment
         applyBottomSafeArea
         childView={() => {
           return (
-            <View style={{ marginTop: 10, flex: 1 }}>
+            <View style={{marginTop: 10, flex: 1}}>
               <GooglePlacesAutocomplete
                 placeholder={t('Search your location')}
                 styles={{
@@ -160,7 +155,7 @@ export const PlacesAutoCompleteForReg = props => {
                   // },
                 }}
                 numberOfLines={2}
-                GooglePlacesDetailsQuery={{ fields: 'geometry' }}
+                GooglePlacesDetailsQuery={{fields: 'geometry'}}
                 fetchDetails={true} // you need this to fetch the details object onPress
                 // onPress={(data, details = null) => {
                 //   console.log("address_details",data,details);
@@ -218,15 +213,15 @@ export const PlacesAutoCompleteForReg = props => {
                 currentLocationLabel="Current location"
                 onFail={error => console.error(error)}
 
-              // renderDescription={(description) => {
-              //   const addressLines = description.split(',').map((line, index) => (
-              //     <Text key={index} style={{ lineHeight: 20 }}>
-              //       {line.trim()}
-              //     </Text>
-              //   ));
+                // renderDescription={(description) => {
+                //   const addressLines = description.split(',').map((line, index) => (
+                //     <Text key={index} style={{ lineHeight: 20 }}>
+                //       {line.trim()}
+                //     </Text>
+                //   ));
 
-              //   return <View>{addressLines}</View>;
-              // }}
+                //   return <View>{addressLines}</View>;
+                // }}
               />
             </View>
           );
@@ -235,3 +230,4 @@ export const PlacesAutoCompleteForReg = props => {
     </View>
   );
 };
+export default PlacesAutoCompleteForReg;

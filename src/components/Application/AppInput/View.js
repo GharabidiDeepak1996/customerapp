@@ -4,7 +4,7 @@ import {TextInput, useColorScheme} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
 import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
-import {SvgIcon} from '../SvgIcon/View';
+//import {TextInput} from 'react-native-gesture-handler';
 
 const PropTypes = require('prop-types');
 
@@ -63,14 +63,15 @@ const AppInput = props => {
       blurOnSubmit={false}
       autoFocus={isAutoFocus}
       leftIcon={
-        showLeftIcon ? (
-          <SvgIcon
-            type={leftIcon}
-            width={20}
-            height={20}
-            color={leftIconColor}
-          />
-        ) : null
+        showLeftIcon
+          ? null
+          : // <SvgIcon
+            //   type={leftIcon}
+            //   width={20}
+            //   height={20}
+            //   color={leftIconColor}
+            // />
+            null
       }
       containerStyle={[
         {

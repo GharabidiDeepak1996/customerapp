@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Alert, ToastAndroid, useColorScheme, View } from 'react-native';
-import { Image, Text } from 'react-native-elements';
+import React, {useEffect, useRef, useState} from 'react';
+import {Alert, ToastAndroid, useColorScheme, View} from 'react-native';
+import {Image, Text} from 'react-native-elements';
 import AppConfig from '../../../../branding/App_config';
 import AppInput from '../../../components/Application/AppInput/View';
-import { Styles } from './Style';
+import {Styles} from './Style';
 import AppHeader from '../../../components/Application/AppHeader/View';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import AppButton from '../../../components/Application/AppButton/View';
-import { CommonActions, useTheme } from '@react-navigation/native';
-import { commonDarkStyles } from '../../../../branding/carter/styles/dark/Style';
-import { commonLightStyles } from '../../../../branding/carter/styles/light/Style';
+import {CommonActions, useTheme} from '@react-navigation/native';
+import {commonDarkStyles} from '../../../../branding/carter/styles/dark/Style';
+import {commonLightStyles} from '../../../../branding/carter/styles/light/Style';
 import Routes from '../../../navigation/Routes';
 import IconNames from '../../../../branding/carter/assets/IconNames';
-import { FocusAwareStatusBar } from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
-import { useTranslation } from 'react-i18next';
-import { AuthService } from '../../../apis/services/Auth';
-import { Banner } from '../../../utils/Banner';
+import {FocusAwareStatusBar} from '../../../components/Application/FocusAwareStatusBar/FocusAwareStatusBar';
+import {useTranslation} from 'react-i18next';
+import {AuthService} from '../../../apis/services/Auth';
+import {Banner} from '../../../utils/Banner';
 import Globals from '../../../utils/Globals';
 
 const assets = AppConfig.assets.default;
@@ -23,13 +23,13 @@ const assets = AppConfig.assets.default;
 export const Variant1ForgotPassword = props => {
   //Theme based styling and colors
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   const globalStyles =
     scheme === 'dark' ? commonDarkStyles(colors) : commonLightStyles(colors);
   const screenStyles = Styles(globalStyles, colors);
 
   //translation
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
 
   //Internal States
   const [emailLoc, setEmail] = useState('');
@@ -55,17 +55,15 @@ export const Variant1ForgotPassword = props => {
       return;
     }
 
-
     try {
       setLoadingNew(true);
       let forgotRequest = {
         email: emailLoc,
-
       };
 
       const response = await AuthService.ForgotPassword(forgotRequest);
 
-      console.log("Forgotpasswooooooooooooo----", response)
+      console.log('Forgotpasswooooooooooooo----', response);
 
       if (response?.data?.isSuccess) {
         setLoadingNew(false);
@@ -77,33 +75,30 @@ export const Variant1ForgotPassword = props => {
               props.navigation.dispatch(
                 CommonActions.reset({
                   index: 1,
-                  routes: [{ name: Routes.LOGIN_FORM_SCREEN1 }],
+                  routes: [{name: Routes.LOGIN_FORM_SCREEN1}],
                 }),
               );
             },
           },
         ]);
       } else {
-        ToastAndroid.show(response?.data?.message, ToastAndroid.BOTTOM)
+        ToastAndroid.show(response?.data?.message, ToastAndroid.BOTTOM);
       }
 
       //       else {
       //   setLoadingNew(false);
       // }
-
     } catch (error) {
       setLoadingNew(false);
       // Cast 'error' to 'any' to handle the TypeScript error
       console.log('Error in handleRegister:', error);
     }
-
   };
-
 
   useEffect(() => {
     const fetchBanner = async () => {
       try {
-        const imageUrl = await Banner("Forgot Password");
+        const imageUrl = await Banner('Forgot Password');
         setBannerImageUrl(imageUrl);
       } catch (error) {
         console.error('Error in YourComponent:', error);
@@ -111,7 +106,7 @@ export const Variant1ForgotPassword = props => {
     };
 
     fetchBanner();
-  })
+  });
 
   return (
     <KeyboardAwareScrollView
@@ -131,7 +126,7 @@ export const Variant1ForgotPassword = props => {
 
         <View style={screenStyles.headerContainer}>
           <Image
-            source={{ uri: `${Globals.imgBaseURL}/${bannerImageUrl}` }}
+            source={{uri: `${Globals.imgBaseURL}/${bannerImageUrl}`}}
             style={screenStyles.headerImage}
           />
         </View>
@@ -148,15 +143,15 @@ export const Variant1ForgotPassword = props => {
           {/* <Text style={screenStyles.titleText}>{'Forgot Password!'}</Text> */}
 
           <Text style={screenStyles.subtitleText}>
-            {
-              t("Enter your email and we'll send you instructions on how to reset it.")
-            }
+            {t(
+              "Enter your email and we'll send you instructions on how to reset it.",
+            )}
           </Text>
 
           <Text
             style={[
               screenStyles.inputLabel,
-              { alignSelf: 'flex-start', marginTop: 8 },
+              {alignSelf: 'flex-start', marginTop: 8},
             ]}>
             Email Address
           </Text>
@@ -164,7 +159,7 @@ export const Variant1ForgotPassword = props => {
             {...globalStyles.secondaryInputStyle}
             containerStyle={screenStyles.emailInputContainer}
             textInputRef={r => (inputRef = r)}
-            leftIcon={IconNames.Envelope}
+            // leftIcon={IconNames.Envelope}
             placeholder={t('Enter email address')}
             value={emailLoc}
             onChangeText={em => {
@@ -177,7 +172,12 @@ export const Variant1ForgotPassword = props => {
             <Text
               style={[
                 screenStyles.accountErrorText,
-                { alignSelf: 'flex-start', color: 'red', marginTop: -6, marginBottom: 12 },
+                {
+                  alignSelf: 'flex-start',
+                  color: 'red',
+                  marginTop: -6,
+                  marginBottom: 12,
+                },
               ]}>
               {errorEmail}
             </Text>
@@ -187,7 +187,7 @@ export const Variant1ForgotPassword = props => {
             title={'Send Link'}
             loader={isLoadingNew}
             onPress={() => {
-              handleRegister()
+              handleRegister();
               // ToastAndroid.show(
               //   'under maintenance forgot password',
               //   ToastAndroid.LONG,
